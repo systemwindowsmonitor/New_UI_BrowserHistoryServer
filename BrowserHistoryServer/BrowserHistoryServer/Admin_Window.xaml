@@ -18,8 +18,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            
-            
+           
         </Grid>
     </Border>
     
