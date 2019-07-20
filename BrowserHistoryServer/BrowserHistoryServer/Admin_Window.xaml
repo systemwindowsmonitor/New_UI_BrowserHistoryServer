@@ -11,8 +11,37 @@
         >
 
     <Grid Background="#FF2196F3">
-        
-        
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+        <Grid HorizontalAlignment="Stretch" Grid.Row="1" Background="{StaticResource PrimaryHueMidBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="248"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" HorizontalAlignment="Center" Margin="48,0,48,3" Width="152">
+                    <Image Source="Assets/dietcenterlogo300.png"/>
+                </Grid>
+                <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                    <StackPanel x:Name="Menu" Margin="10"/>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+
+
+
         <Grid  Background="White" Grid.Column="1" Name="Work_Grid" Margin="250 40 0 40" Width="1024">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -72,7 +101,7 @@
             </Button>
         </StackPanel>
 
-        
+
     </Grid>
 
 </Window>
