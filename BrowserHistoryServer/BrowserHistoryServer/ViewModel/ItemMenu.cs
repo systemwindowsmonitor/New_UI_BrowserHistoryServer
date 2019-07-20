@@ -22,6 +22,7 @@ namespace BrowserHistoryServer.ViewModel
             Header = header;
             Screen = screen;
             Icon = icon;
+
         }
 
         public string Header { get; private set; }

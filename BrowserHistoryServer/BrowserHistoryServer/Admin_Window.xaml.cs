@@ -26,42 +26,38 @@ namespace BrowserHistoryServer
             InitializeComponent();
 
             var menuRegister = new List<SubItem>();
-            menuRegister.Add(new SubItem("Customer"));
-            menuRegister.Add(new SubItem("Providers"));
-            menuRegister.Add(new SubItem("Employees"));
-            menuRegister.Add(new SubItem("Products"));
-            var item6 = new ItemMenu("Register", menuRegister, PackIconKind.Register);
+            menuRegister.Add(new SubItem("Добавить юзера"));
+            menuRegister.Add(new SubItem("Добавить пользователя"));
+            var item6 = new ItemMenu("Регистрация", menuRegister, PackIconKind.Register);
 
             var menuSchedule = new List<SubItem>();
-            menuSchedule.Add(new SubItem("Services"));
-            menuSchedule.Add(new SubItem("Meetings"));
-            var item1 = new ItemMenu("Appointments", menuSchedule, PackIconKind.Schedule);
+            menuSchedule.Add(new SubItem("Удаление"));
+            menuSchedule.Add(new SubItem("Пользователи"));
+            var item1 = new ItemMenu("Редактирование", menuSchedule, PackIconKind.Edit);
 
             var menuReports = new List<SubItem>();
-            menuReports.Add(new SubItem("Customers"));
-            menuReports.Add(new SubItem("Providers"));
-            menuReports.Add(new SubItem("Products"));
-            menuReports.Add(new SubItem("Stock"));
-            menuReports.Add(new SubItem("Sales"));
-            var item2 = new ItemMenu("Reports", menuReports, PackIconKind.FileReport);
+            menuReports.Add(new SubItem("Html"));
+            menuReports.Add(new SubItem("Excel"));
+            menuReports.Add(new SubItem("Word"));
+            menuReports.Add(new SubItem("PDF"));
+            var item2 = new ItemMenu("Отчеты", menuReports, PackIconKind.FileReport);
 
             var menuExpenses = new List<SubItem>();
-            menuExpenses.Add(new SubItem("Fixed"));
-            menuExpenses.Add(new SubItem("Variable"));
-            var item3 = new ItemMenu("Expenses", menuExpenses, PackIconKind.ShoppingBasket);
+            menuExpenses.Add(new SubItem("Юзеры"));
+            menuExpenses.Add(new SubItem("Пользователи"));
+            var item3 = new ItemMenu("Списки", menuExpenses, PackIconKind.ViewList);
 
-            var menuFinancial = new List<SubItem>();
-            menuFinancial.Add(new SubItem("Cash flow"));
-            var item4 = new ItemMenu("Financial", menuFinancial, PackIconKind.ScaleBalance);
+            var item4 = new ItemMenu("Настройки", new UserControl(), PackIconKind.Settings);
 
-            var item0 = new ItemMenu("Dashboard", new UserControl(), PackIconKind.ViewDashboard);
-
-            Menu.Children.Add(new UserControlMenuItem(item0));
             Menu.Children.Add(new UserControlMenuItem(item6));
             Menu.Children.Add(new UserControlMenuItem(item1));
             Menu.Children.Add(new UserControlMenuItem(item2));
             Menu.Children.Add(new UserControlMenuItem(item3));
             Menu.Children.Add(new UserControlMenuItem(item4));
+
+
         }
+
+        
     }
 }
