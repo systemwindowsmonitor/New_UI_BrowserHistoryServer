@@ -32,7 +32,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" HorizontalAlignment="Center" Margin="48,0,48,3" Width="152">
-                    <Image Source="Assets/dietcenterlogo300.png"/>
+                    <Image Source="Assets/dietcenterlogo300.png" Width="90"/>
                 </Grid>
                 <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
                     <StackPanel x:Name="Menu" Margin="10"/>
