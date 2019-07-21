@@ -64,11 +64,9 @@
     <Compile Include="Add_Admin_Window.xaml.cs">
       <DependentUpon>Add_Admin_Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlMenuItem.xaml.cs">
-      <DependentUpon>UserControlMenuItem.xaml</DependentUpon>
+    <Compile Include="New_Admin_Window.xaml.cs">
+      <DependentUpon>New_Admin_Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ItemMenu.cs" />
-    <Compile Include="ViewModel\SubItem.cs" />
     <Page Include="Add_Admin_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -92,7 +90,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControlMenuItem.xaml">
+    <Page Include="New_Admin_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
