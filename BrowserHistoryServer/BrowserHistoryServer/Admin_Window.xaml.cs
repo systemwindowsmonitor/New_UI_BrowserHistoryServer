@@ -25,6 +25,9 @@ namespace BrowserHistoryServer
     public partial class Admin_Window : Window
     {
         string databaseName = (System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
+
+        public object SnackbarUnsavedChenges { get; private set; }
+
         public Admin_Window()
         {
             InitializeComponent();
@@ -57,11 +60,7 @@ namespace BrowserHistoryServer
             progress.Kill();
         }
 
-        private void ListViewItem_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
-
+       
         private void MainDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             MainDataGrid.Columns[0].Header = "ID";
@@ -70,19 +69,17 @@ namespace BrowserHistoryServer
             MainDataGrid.Columns[3].Header = "Регион";
         }
 
-        private void ListView_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void ListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            switch ((sender as ListViewItem).Name)
+            var listView = (ListView)sender;
+            string selectedName = string.Empty;
+            if (listView.SelectedItems.Count != 0)
+            {
+                selectedName = ((ListViewItem)listView.SelectedItem).Name;
+            }
+            //var selected = (ListViewItem)listView.SelectedItems[0];
+
+            switch (selectedName)
             {
                 //case "AddAdmin":
                 //    new View.Add_Admin_Window().ShowDialog();
@@ -103,6 +100,9 @@ namespace BrowserHistoryServer
                 default:
                     break;
             }
+            listView.UnselectAll();
         }
+
+       
     }
 }
