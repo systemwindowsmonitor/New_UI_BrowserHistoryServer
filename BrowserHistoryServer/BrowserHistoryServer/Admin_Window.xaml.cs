@@ -56,6 +56,9 @@ namespace BrowserHistoryServer
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
+
+
+
             Process progress = Process.GetCurrentProcess();
             progress.Kill();
         }
@@ -103,6 +106,9 @@ namespace BrowserHistoryServer
             listView.UnselectAll();
         }
 
-       
+        private void ButtonMinus_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }
