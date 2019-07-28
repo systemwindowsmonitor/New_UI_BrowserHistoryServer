@@ -4,7 +4,7 @@ using System.Data.SQLite;
 
 namespace BrowserHistory_Server.Data
 {
-    class DbManager
+    class DbManager : System.IDisposable
     {
         string dataBaseName;
         SQLiteConnection connection;
@@ -139,5 +139,22 @@ namespace BrowserHistory_Server.Data
             return 0;
         }
         #endregion
+
+        public void Dispose()
+        {
+            try
+            {
+                if (connection != null)
+                {
+                    connection.Clone();
+                    connection.Dispose();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
     }
 }
