@@ -196,6 +196,9 @@
     <Compile Include="Data\DbManager.cs" />
     <Compile Include="Data\Model.cs" />
     <Compile Include="Data\User.cs" />
+    <Compile Include="Edit_Window.xaml.cs">
+      <DependentUpon>Edit_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="New_Admin_Window.xaml.cs">
       <DependentUpon>New_Admin_Window.xaml</DependentUpon>
     </Compile>
@@ -208,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Admin_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Edit_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

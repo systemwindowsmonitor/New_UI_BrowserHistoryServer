@@ -35,7 +35,7 @@ namespace BrowserHistoryServer
             db.Connect();
             MainDataGrid.ItemsSource = db.getUsers();
             //MessageBox.Show(MainDataGrid..ToString());
-            
+
             //MainDataGrid.Columns.Add(new DataGridTextColumn() { Header = "DSA" });
             TextBoxSerch.Focus();
         }
@@ -56,9 +56,6 @@ namespace BrowserHistoryServer
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
-
-
-
             Process progress = Process.GetCurrentProcess();
             progress.Kill();
         }
@@ -95,10 +92,9 @@ namespace BrowserHistoryServer
                 //case "EditUser":
                 //    new View.Window_Edit().ShowDialog();
                 //    break;
-                //case "Settings":
-                //    new View.Window_Settings().ShowDialog();
-                //    break;
-
+                case "viewlist":
+                    new Edit_Window().ShowDialog();
+                    break;
                 default:
                     break;
             }
@@ -108,6 +104,11 @@ namespace BrowserHistoryServer
         private void ButtonMinus_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }
