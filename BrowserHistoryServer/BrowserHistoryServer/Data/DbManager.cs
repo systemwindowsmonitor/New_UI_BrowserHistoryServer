@@ -49,7 +49,7 @@ namespace BrowserHistory_Server.Data
         #endregion
 
         #region взаимодействие с логином/паролем
-        public bool  CheckLogin(string login)
+        public bool CheckLogin(string login)
         {
             return GetLogins(login) > 0 ? true : false;
         }
@@ -80,10 +80,12 @@ namespace BrowserHistory_Server.Data
             return data;
         }
 
-        public List<string> GetLogins() {
+        public List<string> GetLogins()
+        {
             List<string> data = new List<string>();
             SQLiteCommand command = new SQLiteCommand("SELECT login FROM AuthorizationData;", connection);
-            using (SQLiteDataReader reader = command.ExecuteReader()){
+            using (SQLiteDataReader reader = command.ExecuteReader())
+            {
                 foreach (DbDataRecord record in reader)
                 {
                     data.Add(record["login"].ToString());
@@ -91,7 +93,8 @@ namespace BrowserHistory_Server.Data
             }
             return data;
         }
-        private int GetLogins(string key) {
+        private int GetLogins(string key)
+        {
             try
             {
                 SQLiteCommand command = new SQLiteCommand("SELECT id FROM AuthorizationData where login = @login;", connection);
@@ -105,10 +108,11 @@ namespace BrowserHistory_Server.Data
 
                 throw ex;
             }
-          
+
             return 0;
         }
-        public List<string> GetPasswords() {
+        public List<string> GetPasswords()
+        {
             List<string> data = new List<string>();
             SQLiteCommand command = new SQLiteCommand("SELECT password FROM AuthorizationData;", connection);
             using (SQLiteDataReader reader = command.ExecuteReader())
@@ -141,6 +145,25 @@ namespace BrowserHistory_Server.Data
         #endregion
 
         #region добавление пользователей
+        public bool AddUser(string acc_name, string ip, string region)
+        {
+            try
+            {
+                SQLiteCommand command = new SQLiteCommand("INSERT INTO Сlient (account_name,ip,Region)" +
+                    "VALUES('account_name','ip','region');", connection);
+                command.Parameters.Add(new SQLiteParameter("@account_name", acc_name));
+                command.Parameters.Add(new SQLiteParameter("@ip", ip));
+                command.Parameters.Add(new SQLiteParameter("@region", region));
+                command.CreateParameter();
+                if (command.ExecuteNonQuery() > 0) return true;
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
+
         public bool AddAdmin(string name, string surname, string middle, string login, string pass, string role)
         {
             try
@@ -185,7 +208,7 @@ namespace BrowserHistory_Server.Data
                 if (command.ExecuteNonQuery() > 0)
                 {
                     command = new SQLiteCommand("SELECT MAX(Id) From AuthorizationData", connection);
-                   
+
                     var i = command.ExecuteReader();
                     if (i.Read())
                     {
@@ -216,7 +239,7 @@ namespace BrowserHistory_Server.Data
             {
                 throw ex;
             }
-            
+
         }
     }
 }
