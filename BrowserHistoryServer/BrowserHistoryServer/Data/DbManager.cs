@@ -140,6 +140,68 @@ namespace BrowserHistory_Server.Data
         }
         #endregion
 
+        #region добавление пользователей
+        public bool AddAdmin(string name, string surname, string middle, string login, string pass, string role)
+        {
+            try
+            {
+                int id = AddAutorizationData(login, pass, role);
+                if (id > 0)
+                {
+                    SQLiteCommand command = new SQLiteCommand("INSERT INTO Admin (IdAutorizationData,NAME,SURNAME,MIDDLENAME)" +
+                        " VALUES(@idAutorizationData, @name, @surname, @middle)", connection);
+                    command.Parameters.Add(new SQLiteParameter("@idAutorizationData", id));
+                    command.Parameters.Add(new SQLiteParameter("@name", name));
+                    command.Parameters.Add(new SQLiteParameter("@surname", surname));
+                    command.Parameters.Add(new SQLiteParameter("@middle", middle));
+                    command.CreateParameter();
+
+                    if (command.ExecuteNonQuery() > 0) return true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// ДОБАВЛЯЕТ НОВЫЕ ДАННЫЕ АВТОРИЗАЦИИ И ВОЗРАЩАЕТ ID ЗАПИСИ
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="pass"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public int AddAutorizationData(string login, string pass, string role)
+        {
+            try
+            {
+                SQLiteCommand command = new SQLiteCommand("INSERT INTO AuthorizationData (login,password,role)VALUES(@login,@password,@role);", connection);
+                command.Parameters.Add(new SQLiteParameter("@login", login));
+                command.Parameters.Add(new SQLiteParameter("@password", pass));
+                command.Parameters.Add(new SQLiteParameter("@role", role));
+                command.CreateParameter();
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    command = new SQLiteCommand("SELECT MAX(Id) From AuthorizationData", connection);
+                   
+                    var i = command.ExecuteReader();
+                    if (i.Read())
+                    {
+                        return int.Parse(i.GetValue(0).ToString());
+                    }
+
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return -1;
+            }
+            return -1;
+        }
+        #endregion
+
         public void Dispose()
         {
             try

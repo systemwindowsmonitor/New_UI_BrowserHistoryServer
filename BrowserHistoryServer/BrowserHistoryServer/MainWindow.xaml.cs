@@ -78,6 +78,9 @@ namespace BrowserHistoryServer
         public MainWindow()
         {
             InitializeComponent();
+            DbManager db = new DbManager(databaseName);
+            db.Connect();
+            db.AddAdmin("test", "test", "test", "test", "test", "admin");
         }
 
         
