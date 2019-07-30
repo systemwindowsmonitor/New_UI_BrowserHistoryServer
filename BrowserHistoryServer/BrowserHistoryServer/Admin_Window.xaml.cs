@@ -80,15 +80,14 @@ namespace BrowserHistoryServer
             {
                 selectedName = ((ListViewItem)listView.SelectedItem).Name;
             }
-            //var selected = (ListViewItem)listView.SelectedItems[0];
 
             switch (selectedName)
             {
-                //case "AddAdmin":
-                //    new View.Add_Admin_Window().ShowDialog();
-                //    break;
                 case "users":
                     new Add_User_Window().ShowDialog();
+                    break;
+                case "clients":
+                    new Add_Clients_Window().ShowDialog();
                     break;
                 //case "DeleteUser":
                 //    new View.Window_Delete().ShowDialog();

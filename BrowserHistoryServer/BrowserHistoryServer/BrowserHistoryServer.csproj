@@ -186,6 +186,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Add_Clients_Window.xaml.cs">
+      <DependentUpon>Add_Clients_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Add_User_Window.xaml.cs">
       <DependentUpon>Add_User_Window.xaml</DependentUpon>
     </Compile>
@@ -196,6 +199,10 @@
     <Compile Include="New_Admin_Window.xaml.cs">
       <DependentUpon>New_Admin_Window.xaml</DependentUpon>
     </Compile>
+    <Page Include="Add_Clients_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Add_User_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
