@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrowserHistory_Server.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,14 +29,19 @@ namespace BrowserHistoryServer
             discardChanges = false;
         }
 
-        private void Closed_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             SnackbarUnsavedChanges.IsActive = true;
         }
 
+        string databaseName = (System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+            DbManager db = new DbManager(databaseName);
+            db.Connect();
+            db.AddAdmin(TexBoxName, TexBoxSurname, TexBoxMiddleName, TexBoxLogin, TexBoxPassword, ComboBoxRole);
+            this.Close();
         }
 
         private void SnackbarMessage_ActionClick(object sender, RoutedEventArgs e)
@@ -44,5 +50,7 @@ namespace BrowserHistoryServer
             discardChanges = true;
             this.Close();
         }
+
+        
     }
 }

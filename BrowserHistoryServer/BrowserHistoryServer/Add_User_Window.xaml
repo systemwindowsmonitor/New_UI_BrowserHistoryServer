@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BrowserHistoryServer"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Add_User_Window" Height="550" Width="400" WindowStyle="None" FontSize="14" WindowStartupLocation="CenterScreen">
+        Title="Add_User_Window" Height="550" Width="400" MaxHeight="550" MaxWidth="400" MinHeight="500" MinWidth="400" WindowStyle="None" FontSize="14" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button Name="Closed" Style="{x:Null}" Background="{x:Null}" BorderBrush="{x:Null}" Click="Closed_Click">
-                <materialDesign:PackIcon Kind="CloseOctagon" Foreground="Red" Height="20" Width="20"/>
+            <Button x:Name="ButtonClose" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Red" Click="ButtonClose_Click">
+                <materialDesign:PackIcon Kind="Power" />
             </Button>
         </StackPanel>
 
@@ -30,39 +30,42 @@
 
             <StackPanel Margin="10 30" Grid.Row="1">
                 <Grid>
-                    <materialDesign:PackIcon Kind="Face" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxName}"/>
-                    <TextBox x:Name="TexBoxName" Margin="5" materialDesign:HintAssist.Hint="ФИО" Padding="8 0 0 0" Text="{Binding Name}"
+                    <materialDesign:PackIcon Kind="Face" VerticalAlignment="Bottom" Margin="2 12"/>
+                    <TextBox x:Name="TexBoxName" Margin="5" materialDesign:HintAssist.Hint="Имя" Padding="8 0 0 0" Text="{Binding Name}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 </Grid>
 
                 <Grid>
-                    <materialDesign:PackIcon Kind="Ip" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxIP}"/>
-                    <TextBox x:Name="TexBoxIP" Margin="5" materialDesign:HintAssist.Hint="IP" Padding="8 0 0 0" Text="{Binding IP}"
+                    <materialDesign:PackIcon Kind="Face" VerticalAlignment="Bottom" Margin="2 12"/>
+                    <TextBox x:Name="TexBoxSurname" Margin="5" materialDesign:HintAssist.Hint="Фамилия" Padding="8 0 0 0" Text="{Binding Surname}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 </Grid>
 
                 <Grid>
-                    <materialDesign:PackIcon Kind="City" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxRegion}"/>
-                    <TextBox x:Name="TexBoxRegion" Margin="5" materialDesign:HintAssist.Hint="Регион" Padding="8 0 0 0" Text="{Binding Region}"
+                    <materialDesign:PackIcon Kind="Face" VerticalAlignment="Bottom" Margin="2 12"/>
+                    <TextBox x:Name="TexBoxMiddleName" Margin="5" materialDesign:HintAssist.Hint="Отчество" Padding="8 0 0 0" Text="{Binding MiddleName}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 </Grid>
 
                 <Grid>
-                    <materialDesign:PackIcon Kind="Login" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxRegion}"/>
-                    <TextBox x:Name="TexBoxLogin" Margin="5" materialDesign:HintAssist.Hint="Регион" Padding="8 0 0 0" Text="{Binding Region}"
+                    <materialDesign:PackIcon Kind="Login" VerticalAlignment="Bottom" Margin="2 12"/>
+                    <TextBox x:Name="TexBoxLogin" Margin="5" materialDesign:HintAssist.Hint="Логин" Padding="8 0 0 0" Text="{Binding Login}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 </Grid>
 
                 <Grid>
-                    <materialDesign:PackIcon Kind="TextboxPassword" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxRegion}"/>
-                    <TextBox x:Name="TexBoxPassword" Margin="5" materialDesign:HintAssist.Hint="Регион" Padding="8 0 0 0" Text="{Binding Region}"
+                    <materialDesign:PackIcon Kind="TextboxPassword" VerticalAlignment="Bottom" Margin="2 12"/>
+                    <TextBox x:Name="TexBoxPassword" Margin="5" materialDesign:HintAssist.Hint="Пароль" Padding="8 0 0 0" Text="{Binding Password}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 </Grid>
 
                 <Grid>
-                    <materialDesign:PackIcon Kind="Man" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxRegion}"/>
-                    <TextBox x:Name="TexBoxRole" Margin="5" materialDesign:HintAssist.Hint="Регион" Padding="8 0 0 0" Text="{Binding Region}"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    <materialDesign:PackIcon Kind="Man" VerticalAlignment="Bottom" Margin="2 12"/>
+                    <ComboBox x:Name="ComboBoxRole" Margin="5" materialDesign:HintAssist.Hint="Роль" Padding="8 0 0 0" Text="{Binding Role}"
+                         Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBoxItem Content="Администратор"/>
+                        <ComboBoxItem Content="Пользователь"/>
+                    </ComboBox>
                 </Grid>
 
             </StackPanel>
@@ -74,7 +77,7 @@
 
             <materialDesign:Snackbar Grid.Row="1" HorizontalAlignment="Stretch" x:Name="SnackbarUnsavedChanges" VerticalAlignment="Bottom">
                 <materialDesign:SnackbarMessage
-                Content="Есть несохраненные изменения, отменить их?"
+                Content="Данные не сохранены!"
                 ActionContent="DISCARD" ActionClick="SnackbarMessage_ActionClick"/>
             </materialDesign:Snackbar>
 

@@ -86,14 +86,14 @@ namespace BrowserHistoryServer
                 case "clients":
                     new Add_Clients_Window().ShowDialog();
                     break;
-                //case "DeleteUser":
-                //    new View.Window_Delete().ShowDialog();
-                //    break;
-                //case "EditUser":
-                //    new View.Window_Edit().ShowDialog();
-                //    break;
-                case "viewlist":
+                case "edit":
                     new Edit_Window().ShowDialog();
+                    break;
+                case "report":
+                    
+                    break;
+                case "viewlist":
+                    
                     break;
                 default:
                     break;
