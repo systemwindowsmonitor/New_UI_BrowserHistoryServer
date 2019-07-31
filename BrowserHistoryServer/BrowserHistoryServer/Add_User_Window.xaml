@@ -55,8 +55,9 @@
 
                 <Grid>
                     <materialDesign:PackIcon Kind="TextboxPassword" VerticalAlignment="Bottom" Margin="2 12"/>
-                    <TextBox x:Name="TexBoxPassword" Margin="5" materialDesign:HintAssist.Hint="Пароль" Padding="8 0 0 0" Text="{Binding Password}"
+                    <TextBox x:Name="TexBoxPassword" Margin="5 0" materialDesign:HintAssist.Hint="Пароль" Padding="8 0 0 0" Text="{Binding Password}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    
                 </Grid>
 
                 <Grid>

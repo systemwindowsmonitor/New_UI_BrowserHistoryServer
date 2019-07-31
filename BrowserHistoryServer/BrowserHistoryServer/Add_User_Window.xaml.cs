@@ -20,8 +20,8 @@ namespace BrowserHistoryServer
     /// </summary>
     public partial class Add_User_Window : Window
     {
-        int hash;
         bool discardChanges;
+        string databaseName = (System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
 
         public Add_User_Window()
         {
@@ -34,13 +34,13 @@ namespace BrowserHistoryServer
             SnackbarUnsavedChanges.IsActive = true;
         }
 
-        string databaseName = (System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
             DbManager db = new DbManager(databaseName);
             db.Connect();
-            db.AddAdmin(TexBoxName, TexBoxSurname, TexBoxMiddleName, TexBoxLogin, TexBoxPassword, ComboBoxRole);
+            db.AddAdmin(TexBoxName.Text.ToString(), TexBoxSurname.Text.ToString(), TexBoxMiddleName.Text.ToString(), TexBoxLogin.Text.ToString(), TexBoxPassword.Text.GetHashCode().ToString(), ComboBoxRole.Text.ToString());
             this.Close();
         }
 
@@ -51,6 +51,6 @@ namespace BrowserHistoryServer
             this.Close();
         }
 
-        
+    
     }
 }

@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Admin_Window" 
-        Height="600" Width="1024" WindowStyle="None" WindowStartupLocation="CenterScreen"  
+        Height="600" Width="1024" WindowStyle="None" WindowStartupLocation="CenterScreen" Closing="Window_Closing"
         >
 
     <WindowChrome.WindowChrome>

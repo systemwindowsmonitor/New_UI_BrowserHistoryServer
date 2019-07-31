@@ -150,7 +150,7 @@ namespace BrowserHistory_Server.Data
             try
             {
                 SQLiteCommand command = new SQLiteCommand("INSERT INTO Сlient (account_name,ip,Region)" +
-                    "VALUES('account_name','ip','region');", connection);
+                    "VALUES(@account_name,@ip,@region);", connection);
                 command.Parameters.Add(new SQLiteParameter("@account_name", acc_name));
                 command.Parameters.Add(new SQLiteParameter("@ip", ip));
                 command.Parameters.Add(new SQLiteParameter("@region", region));

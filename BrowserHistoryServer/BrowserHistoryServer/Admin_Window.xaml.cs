@@ -24,14 +24,13 @@ namespace BrowserHistoryServer
     /// </summary>
     public partial class Admin_Window : Window
     {
-        string databaseName = (System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
-
+        DbManager db = new DbManager(System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
         public object SnackbarUnsavedChenges { get; private set; }
 
         public Admin_Window()
         {
             InitializeComponent();
-            DbManager db = new DbManager(databaseName);
+          
             db.Connect();
             MainDataGrid.ItemsSource = db.getUsers();
             //MessageBox.Show(MainDataGrid..ToString());
@@ -99,6 +98,7 @@ namespace BrowserHistoryServer
                     break;
             }
             listView.UnselectAll();
+            MainDataGrid.ItemsSource = db.getUsers();
         }
 
         private void ButtonMinus_Click(object sender, RoutedEventArgs e)
@@ -109,6 +109,16 @@ namespace BrowserHistoryServer
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void Window_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            db.Disconnect();
         }
     }
 }
