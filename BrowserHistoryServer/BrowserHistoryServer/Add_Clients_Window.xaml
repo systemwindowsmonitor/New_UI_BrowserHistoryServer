@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BrowserHistoryServer"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-       Title="Add_Cliens_Window" Height="500" Width="400" WindowStyle="None" FontSize="14" WindowStartupLocation="CenterScreen">
+       Title="Add_Cliens_Window" Height="500" Width="400" WindowStyle="None" FontSize="14" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"> 
     <Grid Name="Add_User">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -43,8 +43,7 @@
 
                 <Grid>
                     <materialDesign:PackIcon Kind="City" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxRegion}"/>
-                    <TextBox x:Name="TexBoxRegion" Margin="5" materialDesign:HintAssist.Hint="Регион" Padding="8 0 0 0" Text="{Binding Region}"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    <ComboBox x:Name="ListRegion" Margin="5" materialDesign:HintAssist.Hint="Регион" Padding="15 0 0 0" />
                 </Grid>
 
             </StackPanel>

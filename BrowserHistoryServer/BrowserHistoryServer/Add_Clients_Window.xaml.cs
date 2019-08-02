@@ -36,7 +36,7 @@ namespace BrowserHistoryServer
                 string myIP = TexBoxIP.Text.ToString();
                 DbManager db = new DbManager(databaseName);
                 db.Connect();
-                db.AddUser(TexBoxName.Text.ToString(), myIP, TexBoxRegion.Text.ToString());
+                db.AddUser(TexBoxName.Text.ToString(), myIP, (ListRegion.SelectedIndex + 1).ToString());
                 this.Close();
             }
             else
@@ -52,6 +52,13 @@ namespace BrowserHistoryServer
             SnackbarUnsavedChanges.IsActive = false;
             discardChanges = true;
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DbManager db = new DbManager(databaseName);
+            db.Connect();
+            ListRegion.ItemsSource = db.getRegions().Values;
         }
     }
 }

@@ -60,6 +60,20 @@ namespace BrowserHistory_Server.Data
         #endregion
 
         #region методы выборки с таблиц
+        public Dictionary<int, string> getRegions()
+        {
+            Dictionary<int, string> data = new Dictionary<int, string>();
+            SQLiteCommand command = new SQLiteCommand("SELECT * FROM Regions;", connection);
+            using (SQLiteDataReader reader = command.ExecuteReader())
+            {
+                foreach (DbDataRecord record in reader)
+                {
+                    data.Add(int.Parse(record.GetValue(0).ToString()), record.GetValue(1).ToString());
+                }
+            }
+            return data;
+        }
+
         public List<User> getUsers()
         {
             List<User> data = new List<User>();
