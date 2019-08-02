@@ -93,7 +93,7 @@ namespace BrowserHistoryServer
                     new Edit_Window().ShowDialog();
                     break;
                 case "report":
-
+                    new Reports_Window().ShowDialog();
                     break;
                 case "viewlist":
 
