@@ -3,6 +3,8 @@ using BrowserHistory_Server.Data;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -30,7 +32,7 @@ namespace BrowserHistoryServer
         public Admin_Window()
         {
             InitializeComponent();
-          
+
             db.Connect();
             MainDataGrid.ItemsSource = db.getUsers();
             //MessageBox.Show(MainDataGrid..ToString());
@@ -39,7 +41,7 @@ namespace BrowserHistoryServer
             TextBoxSerch.Focus();
         }
 
-            
+
 
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -59,7 +61,7 @@ namespace BrowserHistoryServer
             progress.Kill();
         }
 
-       
+
         private void MainDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             MainDataGrid.Columns[0].Header = "ID";
@@ -91,10 +93,10 @@ namespace BrowserHistoryServer
                     new Edit_Window().ShowDialog();
                     break;
                 case "report":
-                    
+
                     break;
                 case "viewlist":
-                    
+
                     break;
                 default:
                     break;
@@ -121,6 +123,40 @@ namespace BrowserHistoryServer
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             db.Disconnect();
+        }
+
+        private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var ObColl = new ObservableCollection<User>(db.getUsers());
+            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
+            ICollectionView Itemlist = _itemSourceList.View;
+            var yourCostumFilter = new Predicate<object>(item => ((User)item).Region == Regions_SearchCombo.SelectedValue.ToString());
+
+            //now we add our Filter
+            Itemlist.Filter = yourCostumFilter;
+            MainDataGrid.ItemsSource = Itemlist;
+        }
+
+        private void PackIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var ObColl = new ObservableCollection<User>(db.getUsers());
+            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
+            ICollectionView Itemlist = _itemSourceList.View;
+            var yourCostumFilter = new Predicate<object>(ComplexFilter);
+            Itemlist.Filter = yourCostumFilter;
+            MainDataGrid.ItemsSource = Itemlist;
+        }
+        private bool ComplexFilter(object _object)
+        {
+            var obj = _object as User;
+            if (obj != null)
+            {
+                if (obj.account_name.Contains(TextBoxSerch.Text) && obj.Region.Equals(Regions_SearchCombo.SelectedValue.ToString()))
+                    return true;
+             
+                    
+            }
+            return false;
         }
     }
 }
