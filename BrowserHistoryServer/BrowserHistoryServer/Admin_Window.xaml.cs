@@ -66,6 +66,8 @@ namespace BrowserHistoryServer
             MainDataGrid.Columns[1].Header = "Имя";
             MainDataGrid.Columns[2].Header = "IP";
             MainDataGrid.Columns[3].Header = "Регион";
+
+            Regions_SearchCombo.ItemsSource = db.getRegions().Values;
         }
 
         private void ListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)

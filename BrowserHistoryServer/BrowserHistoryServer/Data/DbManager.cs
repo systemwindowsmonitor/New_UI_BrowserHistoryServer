@@ -77,7 +77,8 @@ namespace BrowserHistory_Server.Data
         public List<User> getUsers()
         {
             List<User> data = new List<User>();
-            SQLiteCommand command = new SQLiteCommand("SELECT * FROM Сlient;", connection);
+            SQLiteCommand command = new SQLiteCommand("select Сlient.Id,Сlient.account_name, Сlient.ip, Regions.name from Сlient" +
+                " left join Regions on Regions.id = Сlient.Region", connection);
             using (SQLiteDataReader reader = command.ExecuteReader())
             {
                 foreach (DbDataRecord record in reader)
@@ -86,7 +87,7 @@ namespace BrowserHistory_Server.Data
                         record["id"].ToString(),
                         record["account_name"].ToString(),
                         record["ip"].ToString(),
-                        record["Region"].ToString()
+                        record["name"].ToString()
                     ));
                 }
             }

@@ -232,14 +232,8 @@
                     </Grid>
 
 
-                    <ComboBox materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White">
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
+                    <ComboBox Name="Regions_SearchCombo" materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White">
+                        
                     </ComboBox>
 
 
