@@ -7,10 +7,10 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Height="560" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <Grid>
+        Height="560" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" >
+    <Grid MouseDown ="Grid_MouseDown">
         <Grid Height="30" VerticalAlignment="Top" Background="#FF3580BF">
-            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button x:Name="ButtonClose" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
                 <materialDesign:PackIcon Kind="Power"/>
             </Button>
         </Grid>

@@ -96,7 +96,7 @@ namespace BrowserHistoryServer
                     new Reports_Window().ShowDialog();
                     break;
                 case "viewlist":
-
+                    new ViewList_Window().ShowDialog();
                     break;
                 default:
                     break;

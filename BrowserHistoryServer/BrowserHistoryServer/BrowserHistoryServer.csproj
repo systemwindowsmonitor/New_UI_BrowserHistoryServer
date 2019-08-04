@@ -205,6 +205,9 @@
     <Compile Include="Reports_Window.xaml.cs">
       <DependentUpon>Reports_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewList_Window.xaml.cs">
+      <DependentUpon>ViewList_Window.xaml</DependentUpon>
+    </Compile>
     <Page Include="Add_Clients_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +242,10 @@
     <Page Include="Reports_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewList_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

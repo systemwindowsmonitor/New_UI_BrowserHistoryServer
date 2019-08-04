@@ -15,15 +15,14 @@ using System.Windows.Shapes;
 namespace BrowserHistoryServer
 {
     /// <summary>
-    /// Логика взаимодействия для Reports_Window.xaml
+    /// Логика взаимодействия для ViewList_Window.xaml
     /// </summary>
-    public partial class Reports_Window : Window
+    public partial class ViewList_Window : Window
     {
-        public Reports_Window()
+        public ViewList_Window()
         {
             InitializeComponent();
-            TextBoxSerchExel.Focus();
-            TextBoxSerchHtml.Focus();
+            TextBoxSerch.Focus();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -31,9 +30,9 @@ namespace BrowserHistoryServer
             DragMove();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
     }
 }

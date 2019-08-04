@@ -22,6 +22,7 @@ namespace BrowserHistoryServer
         public Edit_Window()
         {
             InitializeComponent();
+            TextBoxSerch.Focus();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
