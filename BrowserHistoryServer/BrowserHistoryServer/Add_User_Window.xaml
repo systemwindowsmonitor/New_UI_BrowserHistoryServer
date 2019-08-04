@@ -62,7 +62,7 @@
 
                 <Grid>
                     <materialDesign:PackIcon Kind="Man" VerticalAlignment="Bottom" Margin="2 12"/>
-                    <ComboBox x:Name="ComboBoxRole" Margin="5" materialDesign:HintAssist.Hint="Роль" Padding="8 0 0 0" Text="{Binding Role}"
+                    <ComboBox x:Name="ComboBoxRole" Margin="5" materialDesign:HintAssist.Hint="Роль" Padding="15 0 0 0" Text="{Binding Role}"
                          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                         <ComboBoxItem Content="Администратор"/>
                         <ComboBoxItem Content="Пользователь"/>
@@ -79,7 +79,7 @@
             <materialDesign:Snackbar Grid.Row="1" HorizontalAlignment="Stretch" x:Name="SnackbarUnsavedChanges" VerticalAlignment="Bottom">
                 <materialDesign:SnackbarMessage
                 Content="Данные не сохранены!"
-                ActionContent="DISCARD" ActionClick="SnackbarMessage_ActionClick"/>
+                ActionContent="Выход" ActionClick="SnackbarMessage_ActionClick"/>
             </materialDesign:Snackbar>
 
         </Grid>

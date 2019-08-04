@@ -153,8 +153,6 @@ namespace BrowserHistoryServer
             {
                 if (obj.account_name.Contains(TextBoxSerch.Text) && obj.Region.Equals(Regions_SearchCombo.SelectedValue.ToString()))
                     return true;
-             
-                    
             }
             return false;
         }

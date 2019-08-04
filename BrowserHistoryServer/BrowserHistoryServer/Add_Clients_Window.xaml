@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button Name="Closed" Style="{x:Null}" Background="{x:Null}" BorderBrush="{x:Null}" Click="Closed_Click">
-                <materialDesign:PackIcon Kind="CloseOctagon" Foreground="Red" Height="20" Width="20"/>
+            <Button Name="Closed" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Red" Click="Closed_Click">
+                <materialDesign:PackIcon Kind="Power"/>
             </Button>
         </StackPanel>
 
@@ -30,19 +30,19 @@
 
             <StackPanel Margin="10 30" Grid.Row="1">
                 <Grid>
-                    <materialDesign:PackIcon Kind="Face" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxName}"/>
+                    <materialDesign:PackIcon Kind="Face" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush}"/>
                     <TextBox x:Name="TexBoxName" Margin="5" materialDesign:HintAssist.Hint="ФИО" Padding="8 0 0 0" Text="{Binding Name}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 </Grid>
 
                 <Grid>
-                    <materialDesign:PackIcon Kind="Ip" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxIP}"/>
+                    <materialDesign:PackIcon Kind="Ip" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush}"/>
                     <TextBox x:Name="TexBoxIP" Margin="5" materialDesign:HintAssist.Hint="IP" Padding="8 0 0 0" Text="{Binding IP}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 </Grid>
 
                 <Grid>
-                    <materialDesign:PackIcon Kind="City" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush, ElementName=TexBoxRegion}"/>
+                    <materialDesign:PackIcon Kind="City" VerticalAlignment="Bottom" Margin="2 12" Foreground="{Binding BorderBrush}"/>
                     <ComboBox x:Name="ListRegion" Margin="5" materialDesign:HintAssist.Hint="Регион" Padding="15 0 0 0" />
                 </Grid>
 
@@ -55,8 +55,8 @@
 
             <materialDesign:Snackbar Grid.Row="1" HorizontalAlignment="Stretch" x:Name="SnackbarUnsavedChanges" VerticalAlignment="Bottom">
                 <materialDesign:SnackbarMessage
-                Content="Есть несохраненные изменения, отменить их?"
-                ActionContent="DISCARD" ActionClick="SnackbarMessage_ActionClick"/>
+                Content="Данные не сохранены!"
+                ActionContent="Выход" ActionClick="SnackbarMessage_ActionClick"/>
             </materialDesign:Snackbar>
 
         </Grid>

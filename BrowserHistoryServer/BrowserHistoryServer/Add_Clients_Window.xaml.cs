@@ -60,5 +60,7 @@ namespace BrowserHistoryServer
             db.Connect();
             ListRegion.ItemsSource = db.getRegions().Values;
         }
+
+       
     }
 }
