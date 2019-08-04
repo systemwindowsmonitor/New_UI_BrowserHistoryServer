@@ -68,10 +68,17 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem x:Name="Save" Grid.Row="1" Grid.ColumnSpan="2" Height="50" HorizontalAlignment="Center" >
+                    <ListViewItem x:Name="Save" Grid.Row="1" Grid.Column="0" Height="50" HorizontalAlignment="Center" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ContentSave" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
-                            <TextBlock Text="Сохранить данные" Margin="10" VerticalAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="Сохранить" Margin="10" VerticalAlignment="Center" Foreground="White"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="ClearSearch" Grid.Row="1" Grid.Column="2" Height="50" HorizontalAlignment="Center" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Clear" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
+                            <TextBlock Text="Очистить" Margin="10" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </ListViewItem>
                 </Grid>
