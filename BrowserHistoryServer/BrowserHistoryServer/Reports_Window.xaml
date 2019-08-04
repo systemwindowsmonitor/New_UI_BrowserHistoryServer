@@ -47,20 +47,14 @@
                                     <TextBox x:Name="TextBoxSerchExel" Grid.Column="0" Focusable="True"  MinWidth="262" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Padding="0 0 50 0" HorizontalAlignment="Left" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White"/>
 
                                     <Button Grid.Column="1"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Margin="0,0,-0.4,0" Background="{x:Null}" BorderBrush="{x:Null}">
-                                        <materialDesign:PackIcon Kind="Search" Height="40" Width="40"/>
+                                        <materialDesign:PackIcon Kind="Search" Height="40" Width="40" MouseLeftButtonDown ="PackIcon_MouseLeftButtonDown"/>
                                     </Button>
                                 </Grid>
 
 
-                                <ComboBox materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White">
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                </ComboBox>
+                                <ComboBox x:Name="Regions_SearchCombo" materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White" SelectionChanged="Regions_SearchCombo_SelectionChanged"/>
+
+
 
 
                                 <Grid>
@@ -105,7 +99,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <DataGrid x:Name="MainDataGridExel" Grid.Row="0" Grid.RowSpan="3" Background="White" />
+                            <DataGrid x:Name="MainDataGridExel" Grid.Row="1" Grid.RowSpan="3" Background="White" Loaded="MainDataGridExel_Loaded"/>
                         </Grid>
                     </Grid>
                 </TabItem>
@@ -137,20 +131,13 @@
                                     <TextBox x:Name="TextBoxSerchHtml" Grid.Column="0" Focusable="True"  MinWidth="262" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Padding="0 0 50 0" HorizontalAlignment="Left" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White"/>
 
                                     <Button Grid.Column="1"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Margin="0,0,-0.4,0" Background="{x:Null}" BorderBrush="{x:Null}">
-                                        <materialDesign:PackIcon Kind="Search" Height="40" Width="40"/>
+                                        <materialDesign:PackIcon Kind="Search" Height="40" Width="40" MouseLeftButtonDown ="PackIcon_MouseLeftButtonDown_Html"/>
                                     </Button>
                                 </Grid>
 
 
-                                <ComboBox materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White">
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                    <ComboBoxItem/>
-                                </ComboBox>
+                                <ComboBox x:Name="Regions_SearchCombo_Html" materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White" SelectionChanged="Regions_SearchCombo_Html_SelectionChanged"/>
+
 
 
                                 <Grid>
@@ -195,7 +182,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <DataGrid x:Name="MainDataGridHtml" Grid.Row="0" Grid.RowSpan="3" Background="White" />
+                            <DataGrid x:Name="MainDataGridHtml" Grid.Row="1" Grid.RowSpan="3" Background="White" Loaded="MainDataGridHtml_Loaded"/>
                         </Grid>
                     </Grid>
                 </TabItem>
