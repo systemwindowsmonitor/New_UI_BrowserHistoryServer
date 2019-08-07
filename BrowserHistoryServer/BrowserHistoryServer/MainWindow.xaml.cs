@@ -69,18 +69,15 @@ namespace BrowserHistoryServer
         const int port = 8888;
         static TcpListener listener;
 
-
-
-        string databaseName = (System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
+        DbManager db = new DbManager((System.IO.Directory.GetCurrentDirectory() + "\\DB.db"));
         Storyboard animation;
         DoubleAnimation a;
 
         public MainWindow()
         {
             InitializeComponent();
-            DbManager db = new DbManager(databaseName);
-            db.Connect();
-            db.AddAdmin("test", "test", "test", "test", "test", "admin");
+
+            Login_TextBox.Focus();           
         }
 
         
@@ -91,14 +88,14 @@ namespace BrowserHistoryServer
 
         private void ButtonSign_Click(object sender, RoutedEventArgs e)
         {
-            DbManager db = new DbManager(databaseName);
+           
             db.Connect();
             //MessageBox.Show(db.CheckLogin(Login_TextBox.Text).ToString());
-            //MessageBox.Show(db.CheckPassword(Password_PasswordBox.Password).ToString());
-            foreach (var item in db.getUsers())
-            {
-                MessageBox.Show(item.id, item.account_name);
-            }
+            if (db.CheckLogin(Login_TextBox.Text))
+                if (db.CheckPassword(Password_PasswordBox.Password))
+                {
+                    new Admin_Window().Show();
+                }
             db.Disconnect();
         }
 

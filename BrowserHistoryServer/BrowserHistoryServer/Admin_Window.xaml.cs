@@ -123,6 +123,7 @@ namespace BrowserHistoryServer
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             db.Disconnect();
+            GC.Collect();
         }
 
         private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
