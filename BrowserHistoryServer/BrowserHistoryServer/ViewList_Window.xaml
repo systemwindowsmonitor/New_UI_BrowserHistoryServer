@@ -23,24 +23,15 @@
                         <ColumnDefinition Width="67"/>
 
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="TextBoxSerch" Grid.Column="0" Focusable="True"  MinWidth="262" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Padding="0 0 50 0" HorizontalAlignment="Left" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White"/>
+                    <TextBox x:Name="TextBoxSerchViewList" Grid.Column="0" Focusable="True"  MinWidth="262" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Padding="0 0 50 0" HorizontalAlignment="Left" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White"/>
 
-                    <Button Grid.Column="1"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Margin="0,0,-0.4,0" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <Button x:Name="Serch_Button_Click" Grid.Column="1"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Margin="0,0,-0.4,0" Background="{x:Null}" BorderBrush="{x:Null}" MouseLeftButtonDown="Serch_Button_Click_MouseLeftButtonDown">
                         <materialDesign:PackIcon Kind="Search" Height="40" Width="40"/>
                     </Button>
                 </Grid>
 
 
-                <ComboBox materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White">
-                    <ComboBoxItem/>
-                    <ComboBoxItem/>
-                    <ComboBoxItem/>
-                    <ComboBoxItem/>
-                    <ComboBoxItem/>
-                    <ComboBoxItem/>
-                    <ComboBoxItem/>
-                </ComboBox>
-
+                <ComboBox x:Name="Regions_SearchComboViewList"  materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White" SelectionChanged="Regions_SearchCombo_SelectionChanged"/>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -59,12 +50,12 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="40" HorizontalAlignment="Right" Margin="10">
                 <Button x:Name="ButtonClose" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonClose_Click">
-                    <materialDesign:PackIcon Kind="Power" />
+                    <materialDesign:PackIcon Kind="Power"/>
                 </Button>
             </StackPanel>
         </Grid>
 
 
-        <DataGrid x:Name="MainDataGrid" Grid.Row="1" Grid.RowSpan="3" Background="White"/>
+        <DataGrid x:Name="MainDataGridViewList" Grid.Row="1" Grid.RowSpan="3" Background="White" Loaded="MainDataGrid_Loaded"/>
     </Grid>
 </Window>
