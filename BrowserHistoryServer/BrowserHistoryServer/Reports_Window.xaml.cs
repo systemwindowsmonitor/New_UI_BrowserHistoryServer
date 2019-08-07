@@ -198,5 +198,15 @@ namespace BrowserHistoryServer
             }
             listView.UnselectAll();
         }
+
+        private void ListView_ClearExel_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+
+            }
+            listView.UnselectAll();
+        }
     }
 }

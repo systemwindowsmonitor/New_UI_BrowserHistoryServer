@@ -34,5 +34,45 @@ namespace BrowserHistoryServer
         {
             this.Close();
         }
+
+        private void Delet_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+
+            }
+            listView.UnselectAll();
+        }
+
+        private void Copy_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+
+            }
+            listView.UnselectAll();
+        }
+
+        private void Save_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+
+            }
+            listView.UnselectAll();
+        }
+
+        private void ClearSearch_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+
+            }
+            listView.UnselectAll();
+        }
     }
 }

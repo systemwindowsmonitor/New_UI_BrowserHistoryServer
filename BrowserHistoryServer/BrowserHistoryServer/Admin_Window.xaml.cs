@@ -158,6 +158,14 @@ namespace BrowserHistoryServer
             return false;
         }
 
-        
+        private void ClearSearch_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+                
+            }
+            listView.UnselectAll();
+        }
     }
 }

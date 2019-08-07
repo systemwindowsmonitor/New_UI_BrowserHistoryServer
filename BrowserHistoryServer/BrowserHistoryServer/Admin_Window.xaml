@@ -267,19 +267,14 @@
                     <ComboBox Name="Regions_SearchCombo" materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                               Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White" SelectionChanged="Regions_SearchCombo_SelectionChanged" />
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <ListViewItem x:Name="ClearSearch" Grid.ColumnSpan="2" Height="50" HorizontalAlignment="Center" >
+                    <ListView x:Name="ClearSearch_Click" SelectionChanged="ClearSearch_Click_SelectionChanged">
+                        <ListViewItem Height="50" HorizontalAlignment="Left" >
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Clear" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
                                 <TextBlock Text="Очистка фильтра" Margin="10" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </ListViewItem>
-                    </Grid>
+                    </ListView>
 
                 </StackPanel>
             </Grid>

@@ -42,46 +42,43 @@
                     </ComboBox>
 
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-
-
-                    <ListViewItem x:Name="Delet" Grid.Column="0" Height="50" HorizontalAlignment="Left" >
+                <ListView x:Name="Delet_Click" SelectionChanged="Delet_Click_SelectionChanged">
+                    <ListViewItem Height="50" HorizontalAlignment="Left" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Delete" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
                             <TextBlock Text="Удалить" Margin="10" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </ListViewItem>
+                </ListView>
 
-                    <ListViewItem x:Name="Copy" Grid.Column="1" Height="50" HorizontalAlignment="Left" >
+                <ListView x:Name="Copy_Click" SelectionChanged="Copy_Click_SelectionChanged">
+                    <ListViewItem Height="50" HorizontalAlignment="Left" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ContentCopy" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
                             <TextBlock Text="Копировать" Margin="2" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </ListViewItem>
+                </ListView>
 
-                    <ListViewItem x:Name="Save" Grid.Row="1" Grid.Column="0" Height="50" HorizontalAlignment="Center" >
+                <ListView x:Name="Save_Click" SelectionChanged="Save_Click_SelectionChanged">
+                    <ListViewItem Height="50" HorizontalAlignment="Left" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ContentSave" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
                             <TextBlock Text="Сохранить" Margin="10" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </ListViewItem>
+                </ListView>
 
-                    <ListViewItem x:Name="ClearSearch" Grid.Row="1" Grid.Column="2" Height="50" HorizontalAlignment="Center" >
+                <ListView x:Name="ClearSearch_Click" SelectionChanged="ClearSearch_Click_SelectionChanged">
+                    <ListViewItem Height="50" HorizontalAlignment="Left" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Clear" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
                             <TextBlock Text="Очистить" Margin="10" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </ListViewItem>
-                </Grid>
+                </ListView>
+                    
+                
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="40" HorizontalAlignment="Right" Margin="10">

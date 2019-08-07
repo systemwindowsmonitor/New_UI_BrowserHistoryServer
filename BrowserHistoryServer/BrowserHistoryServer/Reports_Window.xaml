@@ -76,7 +76,7 @@
                                     </ListViewItem>
                                 </ListView>
 
-                                <ListView x:Name="ListView_ClearExel_Click">
+                                <ListView x:Name="ListView_ClearExel_Click" SelectionChanged="ListView_ClearExel_Click_SelectionChanged">
                                     <ListViewItem x:Name="ClearExel" Height="50" HorizontalAlignment="Left" >
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Clear" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
