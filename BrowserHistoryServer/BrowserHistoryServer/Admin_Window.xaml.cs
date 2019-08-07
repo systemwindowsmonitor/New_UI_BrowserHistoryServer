@@ -55,7 +55,7 @@ namespace BrowserHistoryServer
             ButtonCloseMenu.Visibility = Visibility.Visible;
         }
 
-        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        private void ButtonPowerOFF_Click(object sender, RoutedEventArgs e)
         {
             Process progress = Process.GetCurrentProcess();
             progress.Kill();
@@ -156,5 +156,7 @@ namespace BrowserHistoryServer
             }
             return false;
         }
+
+        
     }
 }
