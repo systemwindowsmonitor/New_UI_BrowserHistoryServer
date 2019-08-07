@@ -1,26 +1,23 @@
 ﻿using BrowserHistory_Server.Data;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace BrowserHistoryServer
 {
     /// <summary>
     /// Логика взаимодействия для Reports_Window.xaml
     /// </summary>
-    public partial class Reports_Window : Window
+    public partial class Reports_Window : System.Windows.Window
     {
         DbManager db = new DbManager(System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
         public Reports_Window()
@@ -42,9 +39,41 @@ namespace BrowserHistoryServer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
+
             Close();
         }
+        public static DataTable DataGridtoDataTable(DataGrid dg)
+        {
 
+
+            dg.SelectAllCells();
+            dg.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+            ApplicationCommands.Copy.Execute(null, dg);
+            dg.UnselectAllCells();
+            String result = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+            string[] Lines = result.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+            string[] Fields;
+            Fields = Lines[0].Split(new char[] { ',' });
+            int Cols = Fields.GetLength(0);
+
+            DataTable dt = new DataTable();
+            for (int i = 0; i < Cols; i++)
+                dt.Columns.Add(Fields[i].ToUpper(), typeof(string));
+            DataRow Row;
+            for (int i = 1; i < Lines.GetLength(0) - 1; i++)
+            {
+                Fields = Lines[i].Split(new char[] { ',' });
+                Row = dt.NewRow();
+                for (int f = 0; f < Cols; f++)
+                {
+                    Row[f] = Fields[f];
+                }
+                dt.Rows.Add(Row);
+            }
+            return dt;
+
+        }
         private void MainDataGridExel_Loaded(object sender, RoutedEventArgs e)
         {
             MainDataGridExel.Columns[0].Header = "ID";
@@ -124,6 +153,50 @@ namespace BrowserHistoryServer
                     return true;
             }
             return false;
+        }
+
+        private void ListView_Export_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = DataGridtoDataTable(MainDataGridExel);
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortTimeString().Replace(':', '_') + ".csv";
+                    CSV.ExportToCSV(path, dt);
+                }
+                catch (Exception rx)
+                {
+                    MessageBox.Show(rx.Message);
+                }
+                MessageBox.Show("Файл сохранен на рабочий стол!");
+            }
+            listView.UnselectAll();
+        }
+
+        private void ListView_PrintExel_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+                try
+                {
+                    this.IsEnabled = false;
+
+                    PrintDialog printDialog = new PrintDialog();
+                    if (printDialog.ShowDialog() == true)
+                    {
+                        printDialog.PrintVisual(MainDataGridExel, "Invoice");
+                    }
+                }
+                finally
+                {
+                    this.IsEnabled = true;
+                }
+            }
+            listView.UnselectAll();
         }
     }
 }
