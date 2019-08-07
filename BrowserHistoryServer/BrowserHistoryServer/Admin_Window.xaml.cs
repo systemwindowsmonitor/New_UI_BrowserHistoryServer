@@ -1,23 +1,13 @@
 ﻿
 using BrowserHistory_Server.Data;
-using MaterialDesignThemes.Wpf;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BrowserHistoryServer
 {
@@ -32,13 +22,8 @@ namespace BrowserHistoryServer
         public Admin_Window()
         {
             InitializeComponent();
-
             db.Connect();
-            MainDataGrid.ItemsSource = db.getUsers();
-            //MessageBox.Show(MainDataGrid..ToString());
 
-            //MainDataGrid.Columns.Add(new DataGridTextColumn() { Header = "DSA" });
-            TextBoxSerch.Focus();
         }
 
 
@@ -64,12 +49,23 @@ namespace BrowserHistoryServer
 
         private void MainDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
+            Regions_SearchCombo.ItemsSource = db.getRegions().Values;
+            UpdateDataGrid();
+        }
+
+        private void UpdateDataGrid()
+        {
+            MainDataGrid.ItemsSource = db.getUsers();
+            TextBoxSerch.Focus();
+            if (MainDataGrid.Columns.Count > 0)
+                UpdateDataGridNames();
+        }
+        private void UpdateDataGridNames()
+        {
             MainDataGrid.Columns[0].Header = "ID";
             MainDataGrid.Columns[1].Header = "Имя";
             MainDataGrid.Columns[2].Header = "IP";
             MainDataGrid.Columns[3].Header = "Регион";
-
-            Regions_SearchCombo.ItemsSource = db.getRegions().Values;
         }
 
         private void ListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -102,7 +98,7 @@ namespace BrowserHistoryServer
                     break;
             }
             listView.UnselectAll();
-            MainDataGrid.ItemsSource = db.getUsers();
+            UpdateDataGrid();
         }
 
         private void ButtonMinus_Click(object sender, RoutedEventArgs e)
@@ -136,6 +132,7 @@ namespace BrowserHistoryServer
             //now we add our Filter
             Itemlist.Filter = yourCostumFilter;
             MainDataGrid.ItemsSource = Itemlist;
+            UpdateDataGridNames();
         }
 
         private void PackIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -143,9 +140,16 @@ namespace BrowserHistoryServer
             var ObColl = new ObservableCollection<User>(db.getUsers());
             var _itemSourceList = new CollectionViewSource() { Source = ObColl };
             ICollectionView Itemlist = _itemSourceList.View;
-            var yourCostumFilter = new Predicate<object>(ComplexFilter);
+            Predicate<object> yourCostumFilter;
+            if (Regions_SearchCombo.SelectedValue != null)
+                yourCostumFilter = new Predicate<object>(ComplexFilter);
+            else
+                yourCostumFilter = new Predicate<object>(item => ((User)item).account_name.Contains(TextBoxSerch.Text));
+
             Itemlist.Filter = yourCostumFilter;
             MainDataGrid.ItemsSource = Itemlist;
+
+            UpdateDataGridNames();
         }
         private bool ComplexFilter(object _object)
         {
@@ -160,12 +164,7 @@ namespace BrowserHistoryServer
 
         private void ClearSearch_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var listView = (ListView)sender;
-            if (listView.SelectedItems.Count != 0)
-            {
-                
-            }
-            listView.UnselectAll();
+            UpdateDataGrid();
         }
     }
 }
