@@ -118,7 +118,7 @@
             <BeginStoryboard Storyboard="{StaticResource PowerOn}"/>
         </EventTrigger>
     </Window.Triggers>
-    <Grid Background="#FF3580BF" MouseDown="Grid_MouseDown">
+    <Grid Background="#FF3580BF" MouseDown="Grid_MouseDown" >
 
         <StackPanel x:Name="StackPanelMenu" Width="250" HorizontalAlignment="Left" Margin="-250 0 0 0" RenderTransformOrigin="0.5,0.5">
             <StackPanel.RenderTransform>
@@ -223,7 +223,8 @@
                 </ListViewItem>
             </ListView>
         </StackPanel>
-        <Grid x:Name="GridMain" Background="#FFFBFB" Width="1024" RenderTransformOrigin="0.5,0.5">
+        
+        <Grid x:Name="GridMain" Background="#FFFBFB" Width="1024" RenderTransformOrigin="0.5,0.5" >
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -381,6 +382,8 @@
                 <materialDesign:PackIcon Kind="Power" Width="80" Height="80"/>
             </Button>
         </Grid>
+
+        
 
     </Grid>
 

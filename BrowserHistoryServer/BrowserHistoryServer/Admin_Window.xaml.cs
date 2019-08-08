@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace BrowserHistoryServer
 {
@@ -24,9 +25,10 @@ namespace BrowserHistoryServer
             InitializeComponent();
             db.Connect();
 
+            
         }
 
-
+         
 
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -166,5 +168,6 @@ namespace BrowserHistoryServer
         {
             UpdateDataGrid();
         }
+        
     }
 }

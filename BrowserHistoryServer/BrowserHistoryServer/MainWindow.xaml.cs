@@ -94,7 +94,8 @@ namespace BrowserHistoryServer
             if (db.CheckLogin(Login_TextBox.Text))
                 if (db.CheckPassword(Password_PasswordBox.Password))
                 {
-                    new Admin_Window().Show();
+                    new Loading().Show();
+                    this.Close();
                 }
             db.Disconnect();
         }
