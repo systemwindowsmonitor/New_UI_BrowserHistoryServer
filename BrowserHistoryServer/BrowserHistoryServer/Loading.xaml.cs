@@ -39,7 +39,7 @@ namespace BrowserHistoryServer
         {
             timer.Stop();
             Hide();
-            new Admin_Window().Show();
+            new User_Window().Show();
             Close();
         }
 

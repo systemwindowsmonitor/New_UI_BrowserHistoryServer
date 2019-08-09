@@ -46,6 +46,7 @@
                 <StackPanel VerticalAlignment="Center" Margin="10">
                     <TextBox materialDesign:HintAssist.Hint="Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Name="Login_TextBox" Margin="0,10" FontFamily="Times New Roman" FontSize="18"/>
                     <PasswordBox materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Name="Password_PasswordBox" Margin="0,10" FontFamily="Times New Roman" FontSize="18"/>
+                    <CheckBox Content="Запомнить пароль?"  Margin="0,10" FontFamily="Times New Roman" FontSize="15"/>
                 </StackPanel>
             </Grid>
 
