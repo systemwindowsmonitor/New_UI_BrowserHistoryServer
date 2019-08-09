@@ -23,7 +23,7 @@ namespace BrowserHistoryServer
         public Loading()
         {
             InitializeComponent();
-            Media.Source = new Uri(Environment.CurrentDirectory + @"\loading.gif");
+            Media.Source = new Uri(Environment.CurrentDirectory + @"\loading-1.gif");
             Loadiing();
         }
 
@@ -46,7 +46,7 @@ namespace BrowserHistoryServer
         void Loadiing()
         {
             timer.Tick += timer_tick;
-            timer.Interval = new TimeSpan(0, 0, 3);
+            timer.Interval = new TimeSpan(0, 0, 8);
             timer.Start();
         }
     }

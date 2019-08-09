@@ -129,6 +129,9 @@ namespace BrowserHistoryServer
             listView.UnselectAll();
         }
 
-        
+        private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
