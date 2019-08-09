@@ -46,9 +46,14 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBox x:Name="TextBoxSerchExel" Grid.Column="0" Focusable="True"  MinWidth="262" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Padding="0 0 50 0" HorizontalAlignment="Left" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White"/>
 
-                                    <Button Grid.Column="1"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Margin="0,0,-0.4,0" Background="{x:Null}" BorderBrush="{x:Null}">
-                                        <materialDesign:PackIcon Kind="Search" Height="40" Width="40" MouseLeftButtonDown ="PackIcon_MouseLeftButtonDown"/>
-                                    </Button>
+                                    <ListView x:Name="Search_Click_Exel" SelectionChanged="Search_Click_Exel_SelectionChanged" Grid.Column="1">
+                                        <ListViewItem Height="50" HorizontalAlignment="Right" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Search" Width="40" Height="40" VerticalAlignment="Center"  Foreground="White"/>
+                                            </StackPanel>
+                                        </ListViewItem>
+                                    </ListView>
+                                    
                                 </Grid>
 
 
@@ -126,9 +131,15 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBox x:Name="TextBoxSerchHtml" Grid.Column="0" Focusable="True"  MinWidth="262" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Padding="0 0 50 0" HorizontalAlignment="Left" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White"/>
 
-                                    <Button Grid.Column="1"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Margin="0,0,-0.4,0" Background="{x:Null}" BorderBrush="{x:Null}">
-                                        <materialDesign:PackIcon Kind="Search" Height="40" Width="40" MouseLeftButtonDown ="PackIcon_MouseLeftButtonDown_Html"/>
-                                    </Button>
+                                    <ListView x:Name="Search_Click_Html" SelectionChanged="Search_Click_Html_SelectionChanged" Grid.Column="1">
+                                        <ListViewItem Height="50" HorizontalAlignment="Right" >
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Search" Width="40" Height="40" VerticalAlignment="Center"  Foreground="White"/>
+                                            </StackPanel>
+                                        </ListViewItem>
+                                    </ListView>
+                                    
+                                    
                                 </Grid>
 
 

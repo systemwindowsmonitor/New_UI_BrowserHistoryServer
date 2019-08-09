@@ -79,22 +79,36 @@ namespace BrowserHistoryServer
 
         private void ClearSearch_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
 
+            }
+            listView.UnselectAll();
         }
 
-        private void PackIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Search_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
 
+            }
+            listView.UnselectAll();
         }
 
         private void MainDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
         private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
+
+        
     }
 }

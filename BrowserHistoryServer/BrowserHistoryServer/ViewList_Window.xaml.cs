@@ -86,16 +86,15 @@ namespace BrowserHistoryServer
             Regions_SearchComboViewList.ItemsSource = db.getRegions().Values;
         }
 
-        private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Search_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var ObColl = new ObservableCollection<User>(db.getUsers());
-            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
-            ICollectionView Itemlist = _itemSourceList.View;
-            var yourCostumFilter = new Predicate<object>(item => ((User)item).Region == Regions_SearchComboViewList.SelectedValue.ToString());
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
 
-            //now we add our Filter
-            Itemlist.Filter = yourCostumFilter;
-            MainDataGridViewList.ItemsSource = Itemlist;
+            }
+            listView.UnselectAll();
         }
 
         private void Serch_Button_Click_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -121,6 +120,7 @@ namespace BrowserHistoryServer
 
         private void ClearSearch_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
@@ -128,5 +128,7 @@ namespace BrowserHistoryServer
             }
             listView.UnselectAll();
         }
+
+        
     }
 }

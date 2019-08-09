@@ -137,22 +137,29 @@ namespace BrowserHistoryServer
             UpdateDataGridNames();
         }
 
-        private void PackIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Search_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var ObColl = new ObservableCollection<User>(db.getUsers());
-            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
-            ICollectionView Itemlist = _itemSourceList.View;
-            Predicate<object> yourCostumFilter;
-            if (Regions_SearchCombo.SelectedValue != null)
-                yourCostumFilter = new Predicate<object>(ComplexFilter);
-            else
-                yourCostumFilter = new Predicate<object>(item => ((User)item).account_name.Contains(TextBoxSerch.Text));
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+                var ObColl = new ObservableCollection<User>(db.getUsers());
+                var _itemSourceList = new CollectionViewSource() { Source = ObColl };
+                ICollectionView Itemlist = _itemSourceList.View;
+                Predicate<object> yourCostumFilter;
+                if (Regions_SearchCombo.SelectedValue != null)
+                    yourCostumFilter = new Predicate<object>(ComplexFilter);
+                else
+                    yourCostumFilter = new Predicate<object>(item => ((User)item).account_name.Contains(TextBoxSerch.Text));
 
-            Itemlist.Filter = yourCostumFilter;
-            MainDataGrid.ItemsSource = Itemlist;
+                Itemlist.Filter = yourCostumFilter;
+                MainDataGrid.ItemsSource = Itemlist;
 
-            UpdateDataGridNames();
+                UpdateDataGridNames();
+            }
+            listView.UnselectAll();
         }
+
         private bool ComplexFilter(object _object)
         {
             var obj = _object as User;
@@ -166,8 +173,15 @@ namespace BrowserHistoryServer
 
         private void ClearSearch_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateDataGrid();
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+                UpdateDataGrid();
+            }
+            listView.UnselectAll();
         }
-        
+
+       
     }
 }

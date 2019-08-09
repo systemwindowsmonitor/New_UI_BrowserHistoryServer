@@ -113,25 +113,29 @@ namespace BrowserHistoryServer
             MainDataGridHtml.ItemsSource = Itemlist;
         }
 
-        private void PackIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Search_Click_Exel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var ObColl = new ObservableCollection<User>(db.getUsers());
-            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
-            ICollectionView Itemlist = _itemSourceList.View;
-            var yourCostumFilter = new Predicate<object>(ComplexFilterExel);
-            Itemlist.Filter = yourCostumFilter;
-            MainDataGridExel.ItemsSource = Itemlist;
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+
+            }
+            listView.UnselectAll();
         }
 
-        private void PackIcon_MouseLeftButtonDown_Html(object sender, MouseButtonEventArgs e)
+        private void Search_Click_Html_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var ObColl = new ObservableCollection<User>(db.getUsers());
-            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
-            ICollectionView Itemlist = _itemSourceList.View;
-            var yourCostumFilter = new Predicate<object>(ComplexFilterHtml);
-            Itemlist.Filter = yourCostumFilter;
-            MainDataGridHtml.ItemsSource = Itemlist;
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+
+            }
+            listView.UnselectAll();
         }
+
+        
 
         private bool ComplexFilterExel(object _object)
         {
@@ -201,6 +205,7 @@ namespace BrowserHistoryServer
 
         private void ListView_ClearExel_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
@@ -208,5 +213,7 @@ namespace BrowserHistoryServer
             }
             listView.UnselectAll();
         }
+
+        
     }
 }

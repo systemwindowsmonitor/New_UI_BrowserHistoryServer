@@ -25,9 +25,13 @@
                     </Grid.ColumnDefinitions>
                     <TextBox x:Name="TextBoxSerchViewList" Grid.Column="0" Focusable="True"  MinWidth="262" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Padding="0 0 50 0" HorizontalAlignment="Left" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White"/>
 
-                    <Button x:Name="Serch_Button_Click" Grid.Column="1"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Margin="0,0,-0.4,0" Background="{x:Null}" BorderBrush="{x:Null}" MouseLeftButtonDown="Serch_Button_Click_MouseLeftButtonDown">
-                        <materialDesign:PackIcon Kind="Search" Height="40" Width="40"/>
-                    </Button>
+                    <ListView x:Name="Search_Click" SelectionChanged="Search_Click_SelectionChanged" Grid.Column="1">
+                        <ListViewItem Height="50" HorizontalAlignment="Right" >
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Search" Width="40" Height="40" VerticalAlignment="Center"  Foreground="White"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
                 </Grid>
 
 

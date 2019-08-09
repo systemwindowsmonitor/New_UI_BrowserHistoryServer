@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace BrowserHistoryServer
 {
@@ -37,6 +28,7 @@ namespace BrowserHistoryServer
 
         private void Delet_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
@@ -47,6 +39,7 @@ namespace BrowserHistoryServer
 
         private void Copy_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
@@ -57,6 +50,7 @@ namespace BrowserHistoryServer
 
         private void Save_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
@@ -67,6 +61,18 @@ namespace BrowserHistoryServer
 
         private void ClearSearch_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+
+            }
+            listView.UnselectAll();
+        }
+
+        private void Search_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
