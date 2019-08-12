@@ -1,4 +1,5 @@
 ﻿using BrowserHistory_Server.Data;
+using BrowserHistoryServer.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,13 +24,12 @@ namespace BrowserHistoryServer
     /// </summary>
     public partial class ViewList_Window : Window
     {
-        DbManager db = new DbManager(System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
+        DataGridManager dataGrid;
         public ViewList_Window()
         {
             InitializeComponent();
 
-            db.Connect();
-            MainDataGridViewList.ItemsSource = db.getUsers();
+            dataGrid = DataGridManager.Init();
 
             TextBoxSerchViewList.Focus();
         }
@@ -44,46 +44,20 @@ namespace BrowserHistoryServer
             this.Close();
         }
 
-        public static DataTable DataGridtoDataTable(DataGrid dg)
-        {
-
-
-            dg.SelectAllCells();
-            dg.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
-            ApplicationCommands.Copy.Execute(null, dg);
-            dg.UnselectAllCells();
-            String result = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
-            string[] Lines = result.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
-            string[] Fields;
-            Fields = Lines[0].Split(new char[] { ',' });
-            int Cols = Fields.GetLength(0);
-
-            DataTable dt = new DataTable();
-            for (int i = 0; i < Cols; i++)
-                dt.Columns.Add(Fields[i].ToUpper(), typeof(string));
-            DataRow Row;
-            for (int i = 1; i < Lines.GetLength(0) - 1; i++)
-            {
-                Fields = Lines[i].Split(new char[] { ',' });
-                Row = dt.NewRow();
-                for (int f = 0; f < Cols; f++)
-                {
-                    Row[f] = Fields[f];
-                }
-                dt.Rows.Add(Row);
-            }
-            return dt;
-
-        }
-
         private void MainDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            MainDataGridViewList.Columns[0].Header = "ID";
-            MainDataGridViewList.Columns[1].Header = "Имя";
-            MainDataGridViewList.Columns[2].Header = "IP";
-            MainDataGridViewList.Columns[3].Header = "Регион";
+            var a = dataGrid.GetRegions();
+            foreach (var item in a)
+            {
+                Regions_SearchComboViewList.Items.Add(item);
+            }
+            UpdateDataGrid();
+        }
 
-            Regions_SearchComboViewList.ItemsSource = db.getRegions().Values;
+        private void UpdateDataGrid()
+        {
+            MainDataGridViewList.ItemsSource = dataGrid.GetTable();
+            TextBoxSerchViewList.Focus();
         }
 
         private void Search_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,19 +66,25 @@ namespace BrowserHistoryServer
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
-
+                Predicate<object> yourCostumFilter;
+                if (Regions_SearchComboViewList.SelectedValue != null)
+                    yourCostumFilter = new Predicate<object>(ComplexFilter);
+                else
+                    yourCostumFilter = new Predicate<object>(item => ((User)item).account_name.Contains(TextBoxSerchViewList.Text));
+                MainDataGridViewList.ItemsSource = dataGrid.GetTable(yourCostumFilter);
             }
             listView.UnselectAll();
         }
 
-        private void Serch_Button_Click_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private bool ComplexFilter(object _object)
         {
-            var ObColl = new ObservableCollection<User>(db.getUsers());
-            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
-            ICollectionView Itemlist = _itemSourceList.View;
-            var yourCostumFilter = new Predicate<object>(ComplexFilterViewList);
-            Itemlist.Filter = yourCostumFilter;
-            MainDataGridViewList.ItemsSource = Itemlist;
+            var obj = _object as User;
+            if (obj != null)
+            {
+                if (obj.account_name.Contains(TextBoxSerchViewList.Text) && obj.Region.Equals(Regions_SearchComboViewList.SelectedValue.ToString()))
+                    return true;
+            }
+            return false;
         }
 
         private bool ComplexFilterViewList(object _object)
@@ -124,14 +104,15 @@ namespace BrowserHistoryServer
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
-
+                UpdateDataGrid();
+                TextBoxSerchViewList.Clear();
             }
             listView.UnselectAll();
         }
 
         private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            MainDataGridViewList.ItemsSource = dataGrid.GetTable(new Predicate<object>(item => ((User)item).Region == Regions_SearchComboViewList.SelectedValue.ToString()));
         }
     }
 }

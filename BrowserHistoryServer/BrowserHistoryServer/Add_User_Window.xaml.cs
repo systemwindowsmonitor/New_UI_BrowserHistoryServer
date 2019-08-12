@@ -39,8 +39,7 @@ namespace BrowserHistoryServer
         {
 
             DbManager db = new DbManager(databaseName);
-            db.Connect();
-            db.AddAdmin(TexBoxName.Text.ToString(), TexBoxSurname.Text.ToString(), TexBoxMiddleName.Text.ToString(), TexBoxLogin.Text.ToString(), TexBoxPassword.Text.GetHashCode().ToString(), ComboBoxRole.Text.ToString());
+            db.AddAdminAsync(TexBoxName.Text.ToString(), TexBoxSurname.Text.ToString(), TexBoxMiddleName.Text.ToString(), TexBoxLogin.Text.ToString(), TexBoxPassword.Text.GetHashCode().ToString(), ComboBoxRole.Text.ToString());
             this.Close();
         }
 

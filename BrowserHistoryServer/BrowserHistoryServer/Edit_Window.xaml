@@ -35,15 +35,9 @@
                 </Grid>
 
 
-                    <ComboBox materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White">
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                    </ComboBox>
+                <ComboBox x:Name="Regions_SearchCombo" materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White" SelectionChanged ="Regions_SearchCombo_SelectionChanged"/>
+
+
 
 
                 <ListView x:Name="Delet_Click" SelectionChanged="Delet_Click_SelectionChanged">
@@ -93,7 +87,7 @@
         </Grid>
 
 
-        <DataGrid x:Name="MainDataGrid" Grid.Row="1" Grid.RowSpan="3" Background="White" />
+        <DataGrid x:Name="MainDataGrid" Grid.Row="1" Grid.RowSpan="3" Background="White" Loaded ="MainDataGrid_Loaded"/>
     </Grid>
     
     

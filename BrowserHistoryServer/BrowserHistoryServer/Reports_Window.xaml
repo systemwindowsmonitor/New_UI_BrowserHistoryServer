@@ -145,41 +145,34 @@
 
                                 <ComboBox x:Name="Regions_SearchCombo_Html" materialDesign:HintAssist.Hint="Регионы" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,10" FontFamily="Times New Roman" FontSize="18" BorderBrush="White" Foreground="White" SelectionChanged="Regions_SearchCombo_Html_SelectionChanged"/>
 
-
-
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="50"/>
-                                        <RowDefinition Height="50"/>
-                                    </Grid.RowDefinitions>
-
-
-                                    <ListViewItem x:Name="ImportHtml" Grid.Column="0" Height="50" HorizontalAlignment="Left" >
+                                <ListView x:Name="Export_Html_Click" SelectionChanged="Export_Html_Click_SelectionChanged">
+                                    <ListViewItem Height="50" HorizontalAlignment="Left" >
                                         <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="Import" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
-                                            <TextBlock Text="Ипорт" Margin="10" VerticalAlignment="Center" Foreground="White"/>
+                                            <materialDesign:PackIcon Kind="Export" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
+                                            <TextBlock Text="Экспорт" Margin="10" VerticalAlignment="Center" Foreground="White"/>
                                         </StackPanel>
                                     </ListViewItem>
+                                </ListView>
 
-                                    <ListViewItem x:Name="PrintHtml" Grid.Column="1" Height="50" HorizontalAlignment="Left" >
+
+                                <ListView x:Name="Print_Html_Click" SelectionChanged="Print_Html_Click_SelectionChanged">
+                                    <ListViewItem Height="50" HorizontalAlignment="Left" >
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Printer" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
                                             <TextBlock Text="Печать" Margin="10" VerticalAlignment="Center" Foreground="White"/>
                                         </StackPanel>
                                     </ListViewItem>
+                                </ListView>
 
-                                    <ListViewItem x:Name="ClearHtml" Grid.Row="1" Grid.ColumnSpan="2" Height="50" HorizontalAlignment="Center" >
+
+                                <ListView x:Name="Clear_Html_Click" SelectionChanged="Clear_Html_Click_SelectionChanged">
+                                    <ListViewItem Height="50" HorizontalAlignment="Left" >
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Clear" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
                                             <TextBlock Text="Очистка фильтра" Margin="10" VerticalAlignment="Center" Foreground="White"/>
                                         </StackPanel>
                                     </ListViewItem>
-                                </Grid>
+                                </ListView>
                             </StackPanel>
                         </Grid>
                         <Grid>

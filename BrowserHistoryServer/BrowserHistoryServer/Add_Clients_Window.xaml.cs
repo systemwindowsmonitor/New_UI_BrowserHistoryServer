@@ -35,8 +35,8 @@ namespace BrowserHistoryServer
             {
                 string myIP = TexBoxIP.Text.ToString();
                 DbManager db = new DbManager(databaseName);
-                db.Connect();
-                db.AddUser(TexBoxName.Text.ToString(), myIP, (ListRegion.SelectedIndex + 1).ToString());
+
+                db.AddUserAsync(TexBoxName.Text.ToString(), myIP, (ListRegion.SelectedIndex + 1).ToString());
                 this.Close();
             }
             else
@@ -44,7 +44,7 @@ namespace BrowserHistoryServer
                 TexBoxIP.Text = string.Empty;
                 TexBoxIP.BorderBrush = Brushes.Red;
             }
-            
+
         }
 
         private void SnackbarMessage_ActionClick(object sender, RoutedEventArgs e)
@@ -57,8 +57,8 @@ namespace BrowserHistoryServer
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             DbManager db = new DbManager(databaseName);
-            db.Connect();
-            ListRegion.ItemsSource = db.getRegions().Values;
+
+            ListRegion.ItemsSource = db.getRegionsAsync().GetAwaiter().GetResult().Values;
         }
 
        

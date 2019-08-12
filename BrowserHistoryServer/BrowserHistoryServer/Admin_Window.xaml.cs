@@ -1,14 +1,12 @@
 ﻿
 using BrowserHistory_Server.Data;
+using BrowserHistoryServer.Data;
 using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
+
 
 namespace BrowserHistoryServer
 {
@@ -17,15 +15,16 @@ namespace BrowserHistoryServer
     /// </summary>
     public partial class Admin_Window : Window
     {
-        DbManager db = new DbManager(System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
+        DataGridManager dataGrid;
         public object SnackbarUnsavedChenges { get; private set; }
+        
 
         public Admin_Window()
         {
             InitializeComponent();
-            db.Connect();
+            dataGrid = DataGridManager.Init();
 
-            
+
         }
 
          
@@ -51,23 +50,27 @@ namespace BrowserHistoryServer
 
         private void MainDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            Regions_SearchCombo.ItemsSource = db.getRegions().Values;
+            var a = dataGrid.GetRegions();
+            foreach (var item in a)
+            {
+                Regions_SearchCombo.Items.Add(item);
+            }
             UpdateDataGrid();
         }
 
         private void UpdateDataGrid()
         {
-            MainDataGrid.ItemsSource = db.getUsers();
+            MainDataGrid.ItemsSource = dataGrid.GetTable();
             TextBoxSerch.Focus();
-            if (MainDataGrid.Columns.Count > 0)
-                UpdateDataGridNames();
         }
+
         private void UpdateDataGridNames()
         {
-            MainDataGrid.Columns[0].Header = "ID";
-            MainDataGrid.Columns[1].Header = "Имя";
-            MainDataGrid.Columns[2].Header = "IP";
-            MainDataGrid.Columns[3].Header = "Регион";
+
+            for (int i = 0; i < MainDataGrid.Columns.Count; i++)
+            {
+                MainDataGrid.Columns[i].Header = dataGrid.GridColumnsName[i];
+            }
         }
 
         private void ListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -120,21 +123,12 @@ namespace BrowserHistoryServer
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            db.Disconnect();
             GC.Collect();
         }
 
         private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var ObColl = new ObservableCollection<User>(db.getUsers());
-            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
-            ICollectionView Itemlist = _itemSourceList.View;
-            var yourCostumFilter = new Predicate<object>(item => ((User)item).Region == Regions_SearchCombo.SelectedValue.ToString());
-
-            //now we add our Filter
-            Itemlist.Filter = yourCostumFilter;
-            MainDataGrid.ItemsSource = Itemlist;
-            UpdateDataGridNames();
+            MainDataGrid.ItemsSource = dataGrid.GetTable(new Predicate<object>(item => ((User)item).Region == Regions_SearchCombo.SelectedValue.ToString()));
         }
 
         private void Search_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -143,19 +137,12 @@ namespace BrowserHistoryServer
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
-                var ObColl = new ObservableCollection<User>(db.getUsers());
-                var _itemSourceList = new CollectionViewSource() { Source = ObColl };
-                ICollectionView Itemlist = _itemSourceList.View;
                 Predicate<object> yourCostumFilter;
                 if (Regions_SearchCombo.SelectedValue != null)
                     yourCostumFilter = new Predicate<object>(ComplexFilter);
                 else
                     yourCostumFilter = new Predicate<object>(item => ((User)item).account_name.Contains(TextBoxSerch.Text));
-
-                Itemlist.Filter = yourCostumFilter;
-                MainDataGrid.ItemsSource = Itemlist;
-
-                UpdateDataGridNames();
+                MainDataGrid.ItemsSource = dataGrid.GetTable(yourCostumFilter);
             }
             listView.UnselectAll();
         }
@@ -178,6 +165,7 @@ namespace BrowserHistoryServer
             if (listView.SelectedItems.Count != 0)
             {
                 UpdateDataGrid();
+                TextBoxSerch.Clear();  
             }
             listView.UnselectAll();
         }

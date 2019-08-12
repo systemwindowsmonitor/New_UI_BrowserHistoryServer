@@ -1,4 +1,5 @@
 ﻿using BrowserHistory_Server.Data;
+using BrowserHistoryServer.Data;
 using System;
 using System.Diagnostics;
 using System.Net.Sockets;
@@ -77,7 +78,7 @@ namespace BrowserHistoryServer
         {
             InitializeComponent();
 
-            Login_TextBox.Focus();           
+            Login_TextBox.Focus();
         }
 
         
@@ -88,8 +89,6 @@ namespace BrowserHistoryServer
 
         private void ButtonSign_Click(object sender, RoutedEventArgs e)
         {
-           
-            db.Connect();
             //MessageBox.Show(db.CheckLogin(Login_TextBox.Text).ToString());
             if (db.CheckLogin(Login_TextBox.Text))
                 if (db.CheckPassword(Password_PasswordBox.Password))
@@ -97,7 +96,6 @@ namespace BrowserHistoryServer
                     new Loading().Show();
                     this.Close();
                 }
-            db.Disconnect();
         }
 
         Thread t;

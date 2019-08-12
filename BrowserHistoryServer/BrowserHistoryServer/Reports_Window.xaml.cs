@@ -1,4 +1,5 @@
 ﻿using BrowserHistory_Server.Data;
+using BrowserHistoryServer.Data;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -19,19 +20,29 @@ namespace BrowserHistoryServer
     /// </summary>
     public partial class Reports_Window : System.Windows.Window
     {
-        DbManager db = new DbManager(System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
+        DataGridManager dataGrid;
         public Reports_Window()
         {
             InitializeComponent();
 
-            db.Connect();
-            MainDataGridExel.ItemsSource = db.getUsers();
-            MainDataGridHtml.ItemsSource = db.getUsers();
+            dataGrid = DataGridManager.Init();
 
             TextBoxSerchExel.Focus();
             TextBoxSerchHtml.Focus();
         }
 
+        private void UpdateDataGrid()
+        {
+            MainDataGridExel.ItemsSource = dataGrid.GetTable();
+            TextBoxSerchExel.Focus();
+        }
+
+        private void UpdateDataGridHtml()
+        {
+            MainDataGridHtml.ItemsSource = dataGrid.GetTable();
+            TextBoxSerchHtml.Focus();
+        }
+ 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -39,8 +50,6 @@ namespace BrowserHistoryServer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-
             Close();
         }
         public static DataTable DataGridtoDataTable(DataGrid dg)
@@ -76,41 +85,32 @@ namespace BrowserHistoryServer
         }
         private void MainDataGridExel_Loaded(object sender, RoutedEventArgs e)
         {
-            MainDataGridExel.Columns[0].Header = "ID";
-            MainDataGridExel.Columns[1].Header = "Имя";
-            MainDataGridExel.Columns[2].Header = "IP";
-            MainDataGridExel.Columns[3].Header = "Регион";
-
-            Regions_SearchCombo.ItemsSource = db.getRegions().Values;
+            var a = dataGrid.GetRegions();
+            foreach (var item in a)
+            {
+                Regions_SearchCombo.Items.Add(item);
+            }
+            UpdateDataGrid();
         }
 
         private void MainDataGridHtml_Loaded(object sender, RoutedEventArgs e)
         {
-            Regions_SearchCombo_Html.ItemsSource = db.getRegions().Values;
+            var a = dataGrid.GetRegions();
+            foreach (var item in a)
+            {
+                Regions_SearchCombo_Html.Items.Add(item);
+            }
+            UpdateDataGridHtml();
         }
 
         private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var ObColl = new ObservableCollection<User>(db.getUsers());
-            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
-            ICollectionView Itemlist = _itemSourceList.View;
-            var yourCostumFilter = new Predicate<object>(item => ((User)item).Region == Regions_SearchCombo.SelectedValue.ToString());
-
-            //now we add our Filter
-            Itemlist.Filter = yourCostumFilter;
-            MainDataGridExel.ItemsSource = Itemlist;
+            MainDataGridExel.ItemsSource = dataGrid.GetTable(new Predicate<object>(item => ((User)item).Region == Regions_SearchCombo.SelectedValue.ToString()));
         }
 
         private void Regions_SearchCombo_Html_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var ObColl = new ObservableCollection<User>(db.getUsers());
-            var _itemSourceList = new CollectionViewSource() { Source = ObColl };
-            ICollectionView Itemlist = _itemSourceList.View;
-            var yourCostumFilter = new Predicate<object>(item => ((User)item).Region == Regions_SearchCombo_Html.SelectedValue.ToString());
-
-            //now we add our Filter
-            Itemlist.Filter = yourCostumFilter;
-            MainDataGridHtml.ItemsSource = Itemlist;
+            MainDataGridHtml.ItemsSource = dataGrid.GetTable(new Predicate<object>(item => ((User)item).Region == Regions_SearchCombo_Html.SelectedValue.ToString()));
         }
 
         private void Search_Click_Exel_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -119,7 +119,12 @@ namespace BrowserHistoryServer
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
-
+                Predicate<object> yourCostumFilter;
+                if (Regions_SearchCombo.SelectedValue != null)
+                    yourCostumFilter = new Predicate<object>(ComplexFilterExel);
+                else
+                    yourCostumFilter = new Predicate<object>(item => ((User)item).account_name.Contains(TextBoxSerchExel.Text));
+                MainDataGridExel.ItemsSource = dataGrid.GetTable(yourCostumFilter);
             }
             listView.UnselectAll();
         }
@@ -130,7 +135,12 @@ namespace BrowserHistoryServer
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
-
+                Predicate<object> yourCostumFilter;
+                if (Regions_SearchCombo_Html.SelectedValue != null)
+                    yourCostumFilter = new Predicate<object>(ComplexFilterHtml);
+                else
+                    yourCostumFilter = new Predicate<object>(item => ((User)item).account_name.Contains(TextBoxSerchHtml.Text));
+                MainDataGridHtml.ItemsSource = dataGrid.GetTable(yourCostumFilter);
             }
             listView.UnselectAll();
         }
@@ -180,6 +190,11 @@ namespace BrowserHistoryServer
             listView.UnselectAll();
         }
 
+        private void Export_Html_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         private void ListView_PrintExel_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var listView = (ListView)sender;
@@ -203,17 +218,52 @@ namespace BrowserHistoryServer
             listView.UnselectAll();
         }
 
+        private void Print_Html_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+                try
+                {
+                    this.IsEnabled = false;
+
+                    PrintDialog printDialog = new PrintDialog();
+                    if (printDialog.ShowDialog() == true)
+                    {
+                        printDialog.PrintVisual(MainDataGridHtml, "Invoice");
+                    }
+                }
+                finally
+                {
+                    this.IsEnabled = true;
+                }
+            }
+            listView.UnselectAll();
+        }
+
         private void ListView_ClearExel_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Не сносить т.к кнопка не будет работать. Писать логику в ифе
             var listView = (ListView)sender;
             if (listView.SelectedItems.Count != 0)
             {
-
+                UpdateDataGrid();
+                TextBoxSerchExel.Clear();
             }
             listView.UnselectAll();
         }
 
+        private void Clear_Html_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+                UpdateDataGridHtml();
+                TextBoxSerchHtml.Clear();
+            }
+            listView.UnselectAll();
+        }
         
     }
 }
