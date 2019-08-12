@@ -91,7 +91,7 @@ namespace BrowserHistoryServer
         {
             //MessageBox.Show(db.CheckLogin(Login_TextBox.Text).ToString());
             if (db.CheckLogin(Login_TextBox.Text))
-                if (db.CheckPassword(Password_PasswordBox.Password))
+                if (db.CheckPassword(Password_PasswordBox.Password.GetHashCode().ToString()))
                 {
                     new Loading().Show();
                     this.Close();
