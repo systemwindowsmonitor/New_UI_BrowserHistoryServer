@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BrowserHistoryServer"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Login" Height="500" Width="350" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="{x:Null}" AllowsTransparency="True">
+        Title="Login" Height="500" Width="350" ResizeMode="NoResize" Closing="Window_Closing" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="{x:Null}" AllowsTransparency="True">
 
     <Border Background="White" CornerRadius="20">
         <Grid x:Name="GridMovement" MouseDown="GridMovement_MouseDown">
@@ -44,9 +44,9 @@
             <Grid Grid.RowSpan="2" Width="280" Height="240" VerticalAlignment="Bottom" Margin="0,100">
                 <TextBlock Text="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="Gray" FontSize="18"/>
                 <StackPanel VerticalAlignment="Center" Margin="10">
-                    <TextBox materialDesign:HintAssist.Hint="Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Name="Login_TextBox" Margin="0,10" FontFamily="Times New Roman" FontSize="18"/>
-                    <PasswordBox materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Name="Password_PasswordBox" Margin="0,10" FontFamily="Times New Roman" FontSize="18"/>
-                    <CheckBox Content="Запомнить пароль?"  Margin="0,10" FontFamily="Times New Roman" FontSize="15"/>
+                    <TextBox materialDesign:HintAssist.Hint="Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Name="Login_TextBox" Margin="0,10" FontFamily="Times New Roman" FontSize="18" TextChanged="Login_TextBox_TextChanged"/>
+                    <PasswordBox materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Name="Password_PasswordBox" Margin="0,10" FontFamily="Times New Roman" FontSize="18" PreviewTextInput="Password_PasswordBox_PreviewTextInput"/>
+                    <CheckBox x:Name="isSavePassword_CheckBox" Content="Запомнить пароль?"  Margin="0,10" FontFamily="Times New Roman" FontSize="15"/>
                 </StackPanel>
             </Grid>
 

@@ -202,10 +202,13 @@
       <DependentUpon>Add_User_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Contact.cs" />
+    <Compile Include="Data\Crypt.cs" />
     <Compile Include="Data\CSV.cs" />
     <Compile Include="Data\DataGridManager.cs" />
     <Compile Include="Data\DbManager.cs" />
     <Compile Include="Data\Model.cs" />
+    <Compile Include="Data\PasswordSaver.cs" />
+    <Compile Include="Data\SimpleUser.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Edit_Window.xaml.cs">
       <DependentUpon>Edit_Window.xaml</DependentUpon>

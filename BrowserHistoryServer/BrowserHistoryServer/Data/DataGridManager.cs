@@ -40,10 +40,11 @@ namespace BrowserHistoryServer.Data
         }
         public ICollectionView GetTable(Predicate<object> filter = null)
         {
-            var data = (new CollectionViewSource() { Source = db.getUsers().GetAwaiter().GetResult() }).View;
+            var data = (new CollectionViewSource() { Source = db.getUsers().GetAwaiter().GetResult()}).View;
             if (filter != null)
                 data.Filter += filter;
             return data; 
         }
+        public List<string> getHeaders() { return GridColumnsName; } 
     }
 }

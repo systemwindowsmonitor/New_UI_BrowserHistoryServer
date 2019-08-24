@@ -62,16 +62,14 @@ namespace BrowserHistoryServer
         {
             MainDataGrid.ItemsSource = dataGrid.GetTable();
             TextBoxSerch.Focus();
-        }
-
-        private void UpdateDataGridNames()
-        {
-
             for (int i = 0; i < MainDataGrid.Columns.Count; i++)
             {
-                MainDataGrid.Columns[i].Header = dataGrid.GridColumnsName[i];
+                MainDataGrid.Columns[i].Header = dataGrid.getHeaders()[i];
+
             }
         }
+
+     
 
         private void ListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
@@ -129,6 +127,7 @@ namespace BrowserHistoryServer
         private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MainDataGrid.ItemsSource = dataGrid.GetTable(new Predicate<object>(item => ((User)item).Region == Regions_SearchCombo.SelectedValue.ToString()));
+            
         }
 
         private void Search_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -165,6 +164,7 @@ namespace BrowserHistoryServer
             if (listView.SelectedItems.Count != 0)
             {
                 UpdateDataGrid();
+                Regions_SearchCombo.SelectedValue = -1;
                 TextBoxSerch.Clear();  
             }
             listView.UnselectAll();

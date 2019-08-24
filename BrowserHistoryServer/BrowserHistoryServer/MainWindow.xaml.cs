@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace BrowserHistoryServer
@@ -73,11 +74,11 @@ namespace BrowserHistoryServer
         DbManager db = new DbManager((System.IO.Directory.GetCurrentDirectory() + "\\DB.db"));
         Storyboard animation;
         DoubleAnimation a;
-
+        PasswordSaver p;
         public MainWindow()
         {
             InitializeComponent();
-
+            p = new PasswordSaver();
             Login_TextBox.Focus();
         }
 
@@ -93,9 +94,15 @@ namespace BrowserHistoryServer
             if (db.CheckLogin(Login_TextBox.Text))
                 if (db.CheckPassword(Password_PasswordBox.Password.GetHashCode().ToString()))
                 {
+                    if (isSavePassword_CheckBox.IsChecked == true)
+                    {
+                        p.addItem(Login_TextBox.Text, Password_PasswordBox.Password);
+                        p.setToXML();
+                    }
                     new Loading().Show();
                     this.Close();
                 }
+            ErrorStyle();
         }
 
         Thread t;
@@ -115,5 +122,29 @@ namespace BrowserHistoryServer
             progress.Kill();
         }
 
+        private void Password_PasswordBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.Contains("\r"))
+            {
+                ButtonSign_Click(sender, null);
+            }
+        }
+        private void ErrorStyle()
+        {
+            Password_PasswordBox.BorderBrush = Brushes.Red;
+            Login_TextBox.BorderBrush = Brushes.Red;
+        }
+
+        private void Login_TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            string pass = p.getPass(Login_TextBox.Text);
+            if (pass.Length > 0)
+                Password_PasswordBox.Password = pass;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+          
+        }
     }
 }
