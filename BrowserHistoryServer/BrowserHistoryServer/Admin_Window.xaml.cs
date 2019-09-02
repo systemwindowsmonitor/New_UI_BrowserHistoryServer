@@ -170,6 +170,9 @@ namespace BrowserHistoryServer
             listView.UnselectAll();
         }
 
-       
+        private void Button_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            new Settings().ShowDialog();
+        }
     }
 }

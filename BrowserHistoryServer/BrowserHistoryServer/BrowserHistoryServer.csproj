@@ -219,6 +219,9 @@
     <Compile Include="Reports_Window.xaml.cs">
       <DependentUpon>Reports_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User_Window.xaml.cs">
       <DependentUpon>User_Window.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
     <Page Include="Reports_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User_Window.xaml">
       <SubType>Designer</SubType>
