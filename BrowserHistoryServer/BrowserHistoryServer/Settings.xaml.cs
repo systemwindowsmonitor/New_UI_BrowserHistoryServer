@@ -41,7 +41,14 @@ namespace BrowserHistoryServer
 
             switch (index)
             {
-                
+                case 0:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new Register_Window());
+                    break;
+                case 1:
+                    GridPrincipal.Children.Clear();
+                    //GridPrincipal.Children.Add(new Register_Window());
+                    break;
                 default:
                     break;
             }

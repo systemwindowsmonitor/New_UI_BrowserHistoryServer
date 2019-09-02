@@ -237,6 +237,9 @@
     <Compile Include="Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Register_Window.xaml.cs">
+      <DependentUpon>Register_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reports_Window.xaml.cs">
       <DependentUpon>Reports_Window.xaml</DependentUpon>
     </Compile>
@@ -284,6 +287,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Register_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Reports_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
