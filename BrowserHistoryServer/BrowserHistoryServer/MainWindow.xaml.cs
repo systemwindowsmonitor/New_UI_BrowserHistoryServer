@@ -71,18 +71,33 @@ namespace BrowserHistoryServer
         const int port = 8888;
         static TcpListener listener;
 
-        DbManager db = new DbManager((System.IO.Directory.GetCurrentDirectory() + "\\DB.db"));
+        DbManager db;
         Storyboard animation;
         DoubleAnimation a;
         PasswordSaver p;
         public MainWindow()
         {
             InitializeComponent();
-            p = new PasswordSaver();
+            if (!InitDataBase())
+                this.Close();
             Login_TextBox.Focus();
         }
 
-        
+        private bool InitDataBase()
+        {
+            try
+            {
+                db = new DbManager((System.IO.Directory.GetCurrentDirectory() + "\\DB.db"));
+                p = new PasswordSaver();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return false;
+        }
+
         private void GridMovement_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();

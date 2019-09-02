@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SQLite;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace BrowserHistory_Server.Data
@@ -11,7 +12,31 @@ namespace BrowserHistory_Server.Data
         string dataBaseName;
         public DbManager(string dataBaseName)
         {
-            this.dataBaseName = dataBaseName;
+            if (File.Exists(System.IO.Directory.GetCurrentDirectory() + "\\DB.db"))
+                this.dataBaseName = dataBaseName;
+            else
+                throw new FileNotFoundException("No such database! Check path to it!");
+            if (!CheckDbTablesAsync().GetAwaiter().GetResult())
+                throw new SQLiteException("No needed tables in dataBase! Please, update it!");
+        }
+
+        private async Task<bool> CheckDbTablesAsync()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(string.Format($"Data Source={dataBaseName};")))
+            {
+                await conn.OpenAsync();
+                SQLiteCommand command = new SQLiteCommand("SELECT name FROM sqlite_master WHERE TYPE = 'table'; ", conn);
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    foreach (DbDataRecord record in reader)
+                    {
+                        if (record.GetValue(0).ToString().Contains("AuthorizationData")){
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
         #region взаимодействие с логином/паролем

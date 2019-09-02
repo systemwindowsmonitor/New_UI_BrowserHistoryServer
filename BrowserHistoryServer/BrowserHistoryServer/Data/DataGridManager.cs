@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,14 @@ namespace BrowserHistoryServer.Data
             if (dataGrid == null)
             {
                 dataGrid = new DataGridManager();
-                dataGrid.db = new DbManager(System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
+                try
+                {
+                    dataGrid.db = new DbManager(System.IO.Directory.GetCurrentDirectory() + "\\DB.db");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             return dataGrid;
         }
@@ -40,11 +48,11 @@ namespace BrowserHistoryServer.Data
         }
         public ICollectionView GetTable(Predicate<object> filter = null)
         {
-            var data = (new CollectionViewSource() { Source = db.getUsers().GetAwaiter().GetResult()}).View;
+            var data = (new CollectionViewSource() { Source = db.getUsers().GetAwaiter().GetResult() }).View;
             if (filter != null)
                 data.Filter += filter;
-            return data; 
+            return data;
         }
-        public List<string> getHeaders() { return GridColumnsName; } 
+        public List<string> getHeaders() { return GridColumnsName; }
     }
 }
