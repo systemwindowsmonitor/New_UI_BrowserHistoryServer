@@ -1,15 +1,11 @@
 ﻿using BrowserHistory_Server.Data;
 using BrowserHistoryServer.Data;
 using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
+using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 
@@ -42,7 +38,7 @@ namespace BrowserHistoryServer
             MainDataGridHtml.ItemsSource = dataGrid.GetTable();
             TextBoxSerchHtml.Focus();
         }
- 
+
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -102,7 +98,23 @@ namespace BrowserHistoryServer
             }
             UpdateDataGridHtml();
         }
-
+        public static bool CheckForInternetConnection()
+        {
+            var ping = new Ping();
+            String host = "google.com";
+            byte[] buffer = new byte[32];
+            int timeout = 1000;
+            var options = new PingOptions();
+            try
+            {
+                var reply = ping.Send(host, timeout, buffer, options);
+                return reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+                return false;
+            }
+        }
         private void Regions_SearchCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MainDataGridExel.ItemsSource = dataGrid.GetTable(new Predicate<object>(item => ((User)item).Region == Regions_SearchCombo.SelectedValue.ToString()));
@@ -145,7 +157,7 @@ namespace BrowserHistoryServer
             listView.UnselectAll();
         }
 
-        
+
 
         private bool ComplexFilterExel(object _object)
         {
@@ -180,7 +192,6 @@ namespace BrowserHistoryServer
                     dt = DataGridtoDataTable(MainDataGridExel);
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortTimeString().Replace(':', '_') + ".csv";
                     CSV.ExportToCSV(path, dt);
-                    new DataMailSender("browserhistory@dietcenter.com.ua", "falcon.ukr1@gmail.com", path).Send();
                 }
                 catch (Exception rx)
                 {
@@ -265,6 +276,37 @@ namespace BrowserHistoryServer
             }
             listView.UnselectAll();
         }
-        
+
+        private void ListView_SendMail_Click_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Не сносить т.к кнопка не будет работать. Писать логику в ифе
+            var listView = (ListView)sender;
+            if (listView.SelectedItems.Count != 0)
+            {
+                if (!CheckForInternetConnection())
+                {
+                    System.Windows.Forms.MessageBox.Show("Нет интернета!");
+                    return;
+                }
+
+                DataTable dt = new DataTable();
+                dt = DataGridtoDataTable(MainDataGridExel);
+                if (dt != null)
+                {
+                    string path = "mailData.csv";
+                    //if (File.Exists(path))
+                    //    File.Delete(path);
+
+                    using (null)
+                    {
+                        CSV.ExportToCSV(path, dt);
+
+                        new DataMailSender("browserhistory@dietcenter.com.ua", "falcon.ukr1@gmail.com", path).Send();
+                    }
+
+                }
+            }
+            listView.UnselectAll();
+        }
     }
 }

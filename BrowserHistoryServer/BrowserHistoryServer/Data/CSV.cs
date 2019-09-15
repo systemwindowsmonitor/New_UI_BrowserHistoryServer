@@ -80,9 +80,12 @@ public static class CSV
                     Array.ForEach(dr.ItemArray, obj => line += String.Format("\"{0}\"{1}", obj, separator));
                     tw.WriteLine(line.TrimEnd(separator));
                 }
+                tw.Close();
+                tw.Dispose();
             }
             fs.Close();
             fs.Dispose();
+            fs = null;
             return true;
         }
         return false;

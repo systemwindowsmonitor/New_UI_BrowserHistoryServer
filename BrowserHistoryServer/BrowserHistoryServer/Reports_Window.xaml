@@ -81,6 +81,15 @@
                                     </ListViewItem>
                                 </ListView>
 
+                                <ListView x:Name="ListView_SendMail_Click" SelectionChanged="ListView_SendMail_Click_SelectionChanged">
+                                    <ListViewItem x:Name="SendMail" Height="50" HorizontalAlignment="Left" >
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Send" Width="30" Height="30" VerticalAlignment="Center"  Foreground="White"/>
+                                            <TextBlock Text="Отправить" Margin="10" VerticalAlignment="Center" Foreground="White"/>
+                                        </StackPanel>
+                                    </ListViewItem>
+                                </ListView>
+
                                 <ListView x:Name="ListView_ClearExel_Click" SelectionChanged="ListView_ClearExel_Click_SelectionChanged">
                                     <ListViewItem x:Name="ClearExel" Height="50" HorizontalAlignment="Left" >
                                         <StackPanel Orientation="Horizontal">
