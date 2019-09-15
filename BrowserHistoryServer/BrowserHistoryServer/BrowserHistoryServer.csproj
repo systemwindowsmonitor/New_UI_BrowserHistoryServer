@@ -226,6 +226,7 @@
     <Compile Include="Data\Crypt.cs" />
     <Compile Include="Data\CSV.cs" />
     <Compile Include="Data\DataGridManager.cs" />
+    <Compile Include="Data\DataMailSender.cs" />
     <Compile Include="Data\DbManager.cs" />
     <Compile Include="Data\Model.cs" />
     <Compile Include="Data\PasswordSaver.cs" />
@@ -236,6 +237,9 @@
     </Compile>
     <Compile Include="Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Main_Settings_Window_new.xaml.cs">
+      <DependentUpon>Main_Settings_Window_new.xaml</DependentUpon>
     </Compile>
     <Compile Include="Register_Window.xaml.cs">
       <DependentUpon>Register_Window.xaml</DependentUpon>
@@ -287,6 +291,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Main_Settings_Window_new.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Register_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

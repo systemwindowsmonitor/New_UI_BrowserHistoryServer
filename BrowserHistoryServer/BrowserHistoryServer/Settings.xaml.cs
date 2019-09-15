@@ -47,7 +47,7 @@ namespace BrowserHistoryServer
                     break;
                 case 1:
                     GridPrincipal.Children.Clear();
-                    //GridPrincipal.Children.Add(new Register_Window());
+                    GridPrincipal.Children.Add(new Main_Settings_Window());
                     break;
                 default:
                     break;
