@@ -301,7 +301,9 @@ namespace BrowserHistoryServer
                     {
                         CSV.ExportToCSV(path, dt);
 
-                        new DataMailSender("browserhistory@dietcenter.com.ua", "falcon.ukr1@gmail.com", path).Send();
+                        var a = new DataMailSender("browserhistory@dietcenter.com.ua", "falcon.ukr1@gmail.com", path);
+                        a.Send();
+                        a.Dispose();
                     }
 
                 }

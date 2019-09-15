@@ -228,6 +228,7 @@
     <Compile Include="Data\DataGridManager.cs" />
     <Compile Include="Data\DataMailSender.cs" />
     <Compile Include="Data\DbManager.cs" />
+    <Compile Include="Data\MailObject.cs" />
     <Compile Include="Data\Model.cs" />
     <Compile Include="Data\PasswordSaver.cs" />
     <Compile Include="Data\SimpleUser.cs" />
